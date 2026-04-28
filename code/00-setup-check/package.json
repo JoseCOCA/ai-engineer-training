@@ -1,0 +1,18 @@
+{
+  "name": "@curso-ai/setup-check",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Smoke test del entorno del curso — verifica que la API de Anthropic responde",
+  "scripts": {
+    "smoke-test": "tsx --env-file=../../.env smoke-test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}
