@@ -22,7 +22,7 @@ import { generateText, type LanguageModel } from "ai";
 import { google } from "@ai-sdk/google";
 import { anthropic } from "@ai-sdk/anthropic";
 import { openai } from "@ai-sdk/openai";
-import { createOllama } from "ollama-ai-provider";
+import { createOllama } from "ollama-ai-provider-v2";
 
 // ---------------------------------------------------------------------------
 // Configuración de proveedores
@@ -54,7 +54,7 @@ interface ProviderConfig {
 
 // Modelos por defecto — se pueden sobrescribir vía env
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "qwen2.5:7b";
-const GOOGLE_MODEL = process.env.GOOGLE_MODEL || "gemini-2.0-flash-exp";
+const GOOGLE_MODEL = process.env.GOOGLE_MODEL || "gemini-2.5-flash";
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5-20251001";
 const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 

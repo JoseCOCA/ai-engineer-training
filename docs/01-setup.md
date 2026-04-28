@@ -169,7 +169,7 @@ Google AI Studio tiene el tier gratuito más generoso del mercado para empezar.
    GOOGLE_GENERATIVE_AI_API_KEY=tu-key-de-google
    ```
 
-**Cuotas del tier gratis (Gemini 2.0 Flash):**
+**Cuotas del tier gratis (Gemini 2.5 Flash):**
 - 15 requests por minuto.
 - 1500 requests por día.
 - Sin necesidad de tarjeta de crédito.
@@ -365,7 +365,7 @@ pnpm smoke-test
 
 Detectando proveedores configurados...
   [OK]   Ollama (local)         qwen2.5:7b
-  [OK]   Google Gemini          gemini-2.0-flash-exp
+  [OK]   Google Gemini          gemini-2.5-flash
   [SKIP] Anthropic Claude       (ANTHROPIC_API_KEY no definida)
   [SKIP] OpenAI                 (OPENAI_API_KEY no definida)
 
@@ -377,7 +377,7 @@ Probando proveedores disponibles...
   Costo:        USD 0.00000 (local)
   Tiempo:       1.234 s
 
-[Google Gemini — gemini-2.0-flash-exp]
+[Google Gemini — gemini-2.5-flash]
   Respuesta:    "¡Hola! ¿Cómo estás?"
   Tokens:       in=14 out=8
   Costo:        USD 0.00000 (free tier)

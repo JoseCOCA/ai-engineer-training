@@ -55,7 +55,7 @@ Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge 
 | Categoría | Tecnología | Cuándo entra |
 |-----------|-----------|--------------|
 | LLM local (default) | Ollama + Qwen 2.5 / Llama 3.1 / Mistral | Módulo 1 |
-| LLM cloud gratuito (default) | Google Gemini 2.0 Flash (free tier amplio) | Módulo 1 |
+| LLM cloud gratuito (default) | Google Gemini 2.5 Flash (free tier amplio) | Módulo 1 |
 | LLM cloud premium (comparativa) | Anthropic Claude (Haiku / Sonnet) | Módulo 1 |
 | LLM cloud open-source (mención) | Groq, OpenRouter, Cerebras | Módulo 1 |
 | Capa de abstracción LLM (TS) | **Vercel AI SDK** | Módulo 1 (desde el smoke test) |
