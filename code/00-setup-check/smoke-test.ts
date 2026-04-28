@@ -50,6 +50,11 @@ interface ProviderConfig {
   buildModel: () => LanguageModel;
   estimateCostUsd: (inputTokens: number, outputTokens: number) => number;
   costNote: string;
+  // Opciones específicas del proveedor pasadas a generateText.
+  // Útil, por ejemplo, para desactivar el "thinking" de Gemini 2.5
+  // y que el budget de tokens se gaste en la respuesta visible, no
+  // en razonamiento interno.
+  providerOptions?: Record<string, Record<string, unknown>>;
 }
 
 // Modelos por defecto — se pueden sobrescribir vía env
@@ -83,6 +88,14 @@ const providers: ProviderConfig[] = [
     buildModel: () => google(GOOGLE_MODEL),
     estimateCostUsd: () => 0,
     costNote: "free tier",
+    // Gemini 2.5 Flash usa "thinking" por defecto, que consume tokens
+    // del presupuesto maxOutputTokens antes de generar la respuesta
+    // visible. Para un smoke test trivial no lo necesitamos.
+    providerOptions: {
+      google: {
+        thinkingConfig: { thinkingBudget: 0 },
+      },
+    },
   },
   {
     id: "anthropic",
@@ -113,7 +126,7 @@ const providers: ProviderConfig[] = [
 // ---------------------------------------------------------------------------
 
 const PROMPT = "Saluda en español en 5 palabras o menos";
-const MAX_TOKENS = 50;
+const MAX_TOKENS = 200;
 
 async function testProvider(p: ProviderConfig): Promise<ProviderResult> {
   if (!p.isAvailable()) {
@@ -128,15 +141,31 @@ async function testProvider(p: ProviderConfig): Promise<ProviderResult> {
       model,
       prompt: PROMPT,
       maxOutputTokens: MAX_TOKENS,
+      ...(p.providerOptions ? { providerOptions: p.providerOptions } : {}),
     });
 
     const elapsedMs = Date.now() - start;
     const inputTokens = result.usage?.inputTokens ?? 0;
     const outputTokens = result.usage?.outputTokens ?? 0;
+    const responseText = result.text.trim();
+
+    // Una respuesta vacía no es éxito, aunque la API no haya lanzado error.
+    // Pasa, por ejemplo, cuando el thinking del modelo agota el budget de
+    // tokens antes de escribir la respuesta visible.
+    if (responseText.length === 0) {
+      return {
+        kind: "error",
+        message:
+          `respuesta vacía (output_tokens=${outputTokens}). ` +
+          "El modelo no generó texto. Posible causa: el thinking del modelo " +
+          "consumió el budget de tokens. Prueba subiendo maxOutputTokens o " +
+          "desactivando thinking en providerOptions.",
+      };
+    }
 
     return {
       kind: "ok",
-      response: result.text.trim(),
+      response: responseText,
       inputTokens,
       outputTokens,
       costUsd: p.estimateCostUsd(inputTokens, outputTokens),
