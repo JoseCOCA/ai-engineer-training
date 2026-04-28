@@ -1,0 +1,54 @@
+# Entorno
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Node
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.npm/
+.pnpm-store/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.python-version
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Datos locales (BBDD, modelos, caches)
+data/
+*.sqlite
+*.db
+.cache/
+.langgraph_cache/
+ollama_models/
+postgres_data/
+langfuse_data/
+
+# Logs
+*.log
+logs/
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Salidas de notebooks
+.ipynb_checkpoints/
+
+# Coverage
+coverage/
+.nyc_output/
+htmlcov/

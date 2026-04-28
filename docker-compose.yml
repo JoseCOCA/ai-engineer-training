@@ -1,0 +1,78 @@
+services:
+  # PostgreSQL con extensión pgvector — BBDD vectorial principal del curso
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: curso-ai-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-curso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-curso}
+      POSTGRES_DB: ${POSTGRES_DB:-curso_ai}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-curso}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Langfuse — observabilidad open-source para LLMs (se levanta a partir del Módulo 6, opcional antes)
+  langfuse-db:
+    image: postgres:16
+    container_name: curso-ai-langfuse-db
+    restart: unless-stopped
+    profiles: ["observability"]
+    environment:
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: langfuse
+      POSTGRES_DB: langfuse
+    volumes:
+      - langfuse_db_data:/var/lib/postgresql/data
+
+  langfuse:
+    image: langfuse/langfuse:2
+    container_name: curso-ai-langfuse
+    restart: unless-stopped
+    profiles: ["observability"]
+    depends_on:
+      - langfuse-db
+    ports:
+      - "${LANGFUSE_PORT:-3000}:3000"
+    environment:
+      DATABASE_URL: postgresql://langfuse:langfuse@langfuse-db:5432/langfuse
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:-change-me-in-prod}
+      SALT: ${LANGFUSE_SALT:-change-me-in-prod}
+      NEXTAUTH_URL: http://localhost:${LANGFUSE_PORT:-3000}
+      TELEMETRY_ENABLED: "false"
+      LANGFUSE_INIT_ORG_ID: curso-ai
+      LANGFUSE_INIT_PROJECT_ID: curso-ai
+
+  # Ollama — modelos open-source locales (Llama, Qwen, Mistral, etc.)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: curso-ai-ollama
+    restart: unless-stopped
+    profiles: ["local-llm"]
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  # Qdrant — comparativa con pgvector en el Módulo 3
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: curso-ai-qdrant
+    restart: unless-stopped
+    profiles: ["qdrant"]
+    ports:
+      - "${QDRANT_PORT:-6333}:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  postgres_data:
+  langfuse_db_data:
+  ollama_data:
+  qdrant_data:
