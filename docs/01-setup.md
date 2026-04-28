@@ -304,6 +304,20 @@ ollama run qwen2.5:7b "Saluda en español en 5 palabras"
 
 Por defecto, Ollama escucha en `http://localhost:11434`. Esa URL ya está en tu `.env` como `OLLAMA_BASE_URL`.
 
+#### Usar otros modelos
+
+`qwen2.5:7b` es el default del curso porque es **accesible para la mayor cantidad de hardware** (corre en 8–16 GB de RAM). Si tienes hardware potente y prefieres un modelo más capaz, puedes sobrescribir el modelo en tu `.env` sin tocar el código:
+
+```env
+# En tu .env (no en env.example, que es público)
+OLLAMA_MODEL=llama3.1:8b          # alternativa similar a qwen2.5:7b
+OLLAMA_MODEL=qwen2.5:14b          # mejor calidad, requiere ~16 GB RAM
+OLLAMA_MODEL=qwen2.5:32b          # calidad alta, requiere ~24 GB RAM
+OLLAMA_MODEL=llama3.3:70b         # cercano a frontera open-source, requiere ~48 GB RAM
+```
+
+Lista actualizada de modelos disponibles: [ollama.com/library](https://ollama.com/library). Acuérdate de hacer `ollama pull <modelo>` antes de usarlo. **Para los ejercicios del curso, cualquier modelo de instrucción de 7B+ es suficiente** — los más grandes simplemente dan respuestas más pulidas.
+
 #### Notas sobre GPU
 
 Ollama detecta automáticamente la GPU si los drivers están bien instalados. Si tu GPU no se detecta y prefieres acelerar la inferencia:
