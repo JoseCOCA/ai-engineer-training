@@ -50,12 +50,15 @@ Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge 
 
 ## 4. Stack tecnológico completo
 
+> **Filosofía del stack:** el curso adopta el patrón de **abstracción de proveedores LLM desde el día 1**. No hay un único proveedor obligatorio — se usa una capa de abstracción (Vercel AI SDK) que permite cambiar de modelo cambiando una sola línea. Esto refleja cómo se construyen sistemas de IA en producción real, donde casarse con un proveedor es un riesgo operacional y económico que rara vez tiene sentido.
+
 | Categoría | Tecnología | Cuándo entra |
 |-----------|-----------|--------------|
-| LLM principal | Anthropic (Claude) | Módulo 1 |
-| LLM comparativa | OpenAI | Módulo 1 |
-| LLM open-source local | Ollama + Llama / Qwen / Mistral | Módulo 2 |
-| App framework (TS) | Vercel AI SDK | Módulo 2 |
+| LLM local (default) | Ollama + Qwen 2.5 / Llama 3.1 / Mistral | Módulo 1 |
+| LLM cloud gratuito (default) | Google Gemini 2.0 Flash (free tier amplio) | Módulo 1 |
+| LLM cloud premium (comparativa) | Anthropic Claude (Haiku / Sonnet) | Módulo 1 |
+| LLM cloud open-source (mención) | Groq, OpenRouter, Cerebras | Módulo 1 |
+| Capa de abstracción LLM (TS) | **Vercel AI SDK** | Módulo 1 (desde el smoke test) |
 | Orquestación de agentes (TS) | LangChain.js + LangGraph.js | Módulo 5 |
 | Orquestación alternativa (Python) | Pydantic AI | Módulo 5 (mención) |
 | BBDD vectorial principal | PostgreSQL + pgvector | Módulo 3 |
@@ -66,7 +69,7 @@ Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge 
 | Evaluación LLMs | Promptfoo (TS), RAGAS (Python) | Módulo 4 + transversal |
 | Deployment | Docker, docker-compose, Cloud Run / Railway | Módulo 6 |
 
-Todo corre **localmente** vía `docker-compose`. No necesitas cuenta cloud ni tarjeta para hacer el curso (excepto para los proveedores LLM, que tienen tier gratis en general).
+**Costo estimado del curso completo:** entre **USD 0 y USD 5**. Si trabajas exclusivamente con Ollama local + Gemini free tier, el costo es cero. Solo gastarías dinero si decides usar Anthropic o OpenAI para las sesiones de comparativa, y aún así los proveedores suelen incluir créditos gratuitos al registrarse.
 
 ## 5. Mapa de aprendizaje y dependencias entre módulos
 

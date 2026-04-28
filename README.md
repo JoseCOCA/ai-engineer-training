@@ -17,8 +17,9 @@ Curso completo de AI Engineer construido como **repositorio público de aprendiz
 | Capa | Tecnología |
 |------|-----------|
 | Lenguajes | TypeScript (principal), Python (puntual) |
-| LLM proveedores | Anthropic (Claude), OpenAI (comparativa), Ollama + modelos open-source (Llama, Qwen, Mistral) |
-| App framework | Vercel AI SDK, LangChain.js, LangGraph.js |
+| LLM proveedores | Ollama (local), Google Gemini (free tier), Anthropic Claude (comparativa), OpenAI (comparativa) |
+| Capa de abstracción | **Vercel AI SDK** — proveedor-agnóstico desde el día 1 |
+| App framework | LangChain.js, LangGraph.js |
 | BBDD vectorial | PostgreSQL + pgvector (principal), Qdrant, Pinecone, Chroma (comparativa) |
 | Observabilidad | Langfuse (principal), LangSmith, Logfire |
 | Evaluación | Promptfoo, RAGAS, DeepEval |

@@ -50,6 +50,15 @@ services:
       LANGFUSE_INIT_PROJECT_ID: curso-ai
 
   # Ollama — modelos open-source locales (Llama, Qwen, Mistral, etc.)
+  # Recomendación: en lugar de Docker, instala Ollama nativamente
+  # (curl -fsSL https://ollama.com/install.sh | sh) — tiene mejor
+  # detección automática de GPU y menos overhead. Este servicio
+  # Docker es un fallback para casos donde no se quiera instalar nada
+  # en el sistema. Ver docs/01-setup.md sección 5.2.
+  #
+  # Tags útiles según tu hardware:
+  #   ollama/ollama:latest -> CPU + NVIDIA con CUDA (default)
+  #   ollama/ollama:rocm   -> CPU + AMD con ROCm
   ollama:
     image: ollama/ollama:latest
     container_name: curso-ai-ollama

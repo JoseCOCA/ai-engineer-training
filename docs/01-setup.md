@@ -141,29 +141,62 @@ sudo usermod -aG docker $USER
 
 ---
 
-## 3. Cuentas y API keys
+## 3. Cuentas y proveedores LLM
 
-### 3.1 Anthropic (Claude) — obligatorio
+> **El curso es proveedor-agnóstico desde el día 1.** Necesitas configurar **al menos uno** de los siguientes proveedores. Si configuras varios, el smoke test los probará todos para que veas en práctica el patrón de abstracción que vas a estudiar formalmente en el Módulo 2.
 
-Es el proveedor LLM principal del curso.
+| Proveedor | Tipo | Costo | Recomendado |
+|-----------|------|-------|-------------|
+| **Ollama** (local) | Modelos open-source en tu máquina | Gratis | ✅ Sí (siempre que tu hardware lo permita) |
+| **Google Gemini** (cloud) | API con tier gratuito amplio | Gratis hasta 1500 req/día | ✅ Sí (es la opción cloud principal del curso) |
+| **Anthropic Claude** (cloud) | API premium | Hay créditos gratuitos al registro | Opcional — solo para sesiones de comparativa |
+| **OpenAI** (cloud) | API premium | De pago tras el trial | Opcional — solo para sesiones de comparativa |
+
+**Estrategia recomendada:**
+1. Instala Ollama local (ver sección 5.2) — es tu motor por defecto, sin costo.
+2. Crea cuenta gratuita en Google AI Studio para tener Gemini disponible cuando necesites más calidad o trabajes sin GPU.
+3. Anthropic y OpenAI son **opcionales**: configúralos solo si quieres seguir las sesiones de comparativa con datos reales.
+
+### 3.1 Google Gemini (recomendado, gratis)
+
+Google AI Studio tiene el tier gratuito más generoso del mercado para empezar.
+
+1. Ve a [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) e inicia sesión con tu cuenta Google.
+2. Click en **Create API key**. Si no tienes proyecto Cloud, crea uno nuevo desde la misma interfaz.
+3. Copia el valor de la key.
+4. Pégala en tu `.env`:
+   ```env
+   GOOGLE_GENERATIVE_AI_API_KEY=tu-key-de-google
+   ```
+
+**Cuotas del tier gratis (Gemini 2.0 Flash):**
+- 15 requests por minuto.
+- 1500 requests por día.
+- Sin necesidad de tarjeta de crédito.
+
+Más que suficiente para todo el curso.
+
+### 3.2 Anthropic Claude (opcional)
+
+Solo necesario si quieres seguir las sesiones de comparativa de proveedores con datos reales en lugar de leer los ejemplos.
 
 1. Ve a [console.anthropic.com](https://console.anthropic.com/) y crea una cuenta.
-2. Carga **al menos USD 5** en créditos. No es estrictamente obligatorio porque Anthropic da créditos gratuitos al registro, pero te ahorra dolores de cabeza.
-3. Ve a **API Keys → Create Key**.
-4. Copia la key (empieza con `sk-ant-api03-...`). **Solo la verás una vez.**
-5. Guarda la key en un gestor de secretos (1Password, Bitwarden, etc.) además del `.env` local.
+2. Anthropic suele dar **créditos gratuitos** al registro (típicamente USD 5). Si los consumes y necesitas más, carga saldo desde **Settings → Billing**.
+3. Ve a **Settings → API Keys → Create Key** ([directo](https://console.anthropic.com/settings/keys)).
+4. Copia la key (empieza con `sk-ant-api03-...`). **Solo se muestra una vez.**
+5. Guarda la key en un gestor de secretos (1Password, Bitwarden, etc.) además del `.env`.
+6. **Configura un spending limit** en **Settings → Billing → Limits** (por ejemplo, USD 10/mes) para evitar sustos.
 
-**Estimación de costo del curso completo:** entre USD 5 y USD 20 si haces todos los ejercicios y el proyecto integrador con modelos de gama media (Sonnet/Haiku). El curso prioriza modelos baratos para los ejercicios.
+### 3.3 OpenAI (opcional)
 
-### 3.2 OpenAI — opcional
-
-Solo se usa para las sesiones de **comparativa de proveedores** (Módulo 1). Puedes saltarlo y usar solo Anthropic durante todo el curso.
+Mismo rol que Anthropic — solo para sesiones de comparativa.
 
 1. Ve a [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
 2. Crea una API key.
 3. Copia el valor (empieza con `sk-...`).
+4. Configura límites de gasto en **Settings → Limits**.
 
-### 3.3 Buenas prácticas con API keys
+### 3.4 Buenas prácticas con API keys
 
 - **Nunca** hagas commit de un `.env` real. El `.gitignore` ya lo excluye, pero verifica con `git status` antes de commitear.
 - **Usa keys distintas** para entornos distintos (desarrollo, CI, producción).
@@ -183,19 +216,27 @@ cd curso-ai
 cp env.example .env
 ```
 
-Edita el `.env` con tu editor favorito y reemplaza al menos:
+Edita el `.env` con tu editor favorito y completa **al menos uno** de estos proveedores:
 
 ```env
+# Recomendado (gratis con tier amplio)
+GOOGLE_GENERATIVE_AI_API_KEY=tu-key-de-google
+
+# Recomendado (gratis si tienes Ollama instalado, ver sección 5.2)
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=qwen2.5:7b
+
+# Opcional (solo para sesiones de comparativa)
 ANTHROPIC_API_KEY=sk-ant-api03-tu-key-real-aqui
 ```
 
-El resto puedes dejarlo con los valores por defecto si solo trabajas en local.
+El resto de variables puedes dejarlas con los valores por defecto si solo trabajas en local.
 
 ---
 
 ## 5. Levantar los servicios base
 
-El repo trae un `docker-compose.yml` con varios servicios. **Por defecto, solo se levanta Postgres + pgvector** (lo que necesitas para los primeros módulos). Los demás servicios usan [Compose profiles](https://docs.docker.com/compose/profiles/) y se levantan bajo demanda.
+El repo trae un `docker-compose.yml` con servicios opcionales que se activan bajo demanda usando [Compose profiles](https://docs.docker.com/compose/profiles/). Postgres + pgvector es el único que se levanta por defecto cuando ejecutas `docker compose up`.
 
 ### 5.1 Postgres + pgvector (necesario desde el Módulo 3)
 
@@ -223,25 +264,79 @@ curso_ai=# \q
 
 Si la extensión `vector` se crea sin error, tu Postgres está listo.
 
-### 5.2 Servicios opcionales (a levantar cuando los pidan los módulos)
+### 5.2 Ollama (recomendado desde el Módulo 1)
+
+Ollama te permite correr modelos open-source en tu propia máquina. Es gratis, sin límites de uso y mantiene los datos en local.
+
+**Hardware recomendado:**
+
+| RAM disponible | Modelos sugeridos | Comportamiento |
+|----------------|-------------------|----------------|
+| < 8 GB | Phi-4-mini, Qwen 2.5 1.5B | Limitado, solo para experimentar |
+| 8–16 GB | Llama 3.1 8B, Qwen 2.5 7B (cuantizados) | Funciona bien en CPU |
+| 16–32 GB | Llama 3.1 8B sin cuantizar, Qwen 2.5 14B | Cómodo en CPU; rápido con GPU |
+| 32 GB+ | Modelos 30B+ con cuantización | Equipo de gama alta |
+
+Tener una GPU acelera la inferencia entre 5x y 50x según el modelo. Funciona también solo con CPU.
+
+**Instalación nativa (recomendada — mejor performance que la imagen Docker):**
+
+```bash
+# Linux / macOS
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Verificar
+ollama --version
+```
+
+**Descargar tu primer modelo:**
+
+```bash
+ollama pull qwen2.5:7b
+# Tarda algunos minutos según tu conexión (~5 GB)
+```
+
+**Probar que funciona:**
+
+```bash
+ollama run qwen2.5:7b "Saluda en español en 5 palabras"
+```
+
+Por defecto, Ollama escucha en `http://localhost:11434`. Esa URL ya está en tu `.env` como `OLLAMA_BASE_URL`.
+
+#### Notas sobre GPU
+
+Ollama detecta automáticamente la GPU si los drivers están bien instalados. Si tu GPU no se detecta y prefieres acelerar la inferencia:
+
+- **NVIDIA con CUDA:** instala los drivers oficiales de NVIDIA y CUDA Toolkit. Ollama los usa automáticamente.
+- **AMD con ROCm:** Ollama soporta ROCm en Linux. Verifica con `rocminfo` que tu GPU esté detectada por ROCm. Para series muy recientes puede ser necesario instalar la versión más reciente de ROCm (6.2+) y, en algunos casos, definir la variable de entorno `HSA_OVERRIDE_GFX_VERSION` antes de iniciar Ollama. Consulta la [documentación oficial de Ollama sobre GPU AMD](https://github.com/ollama/ollama/blob/main/docs/gpu.md) para los detalles más actuales.
+- **Apple Silicon (M1/M2/M3/M4):** Ollama usa Metal automáticamente, sin configuración.
+
+Si la GPU no se acelera, Ollama caerá automáticamente a CPU. La inferencia será más lenta, pero funcional.
+
+#### Alternativa con Docker (si prefieres no instalar Ollama nativamente)
+
+```bash
+# CPU o NVIDIA
+docker compose --profile local-llm up -d ollama
+
+# AMD con ROCm — usa la imagen específica
+# (edita docker-compose.yml y cambia ollama/ollama:latest a ollama/ollama:rocm)
+```
+
+### 5.3 Servicios opcionales
 
 Cada profile se activa con `--profile`:
 
 ```bash
-# Ollama (modelos open-source locales — Módulo 2)
-docker compose --profile local-llm up -d
-
 # Langfuse (observabilidad — Módulo 6)
 docker compose --profile observability up -d
 
 # Qdrant (BBDD vectorial alternativa — Módulo 3)
 docker compose --profile qdrant up -d
-
-# Todo a la vez
-docker compose --profile local-llm --profile observability --profile qdrant up -d
 ```
 
-### 5.3 Apagar servicios
+### 5.4 Apagar servicios
 
 ```bash
 # Apagar todos
@@ -255,7 +350,7 @@ docker compose down -v
 
 ## 6. Verificación: smoke test
 
-El último paso es ejecutar un smoke test que llama a la API de Anthropic y verifica que tu setup completo funciona. El código vive en `code/00-setup-check/`.
+El smoke test detecta automáticamente qué proveedores LLM tienes configurados (Ollama, Gemini, Anthropic, OpenAI) y prueba todos los disponibles. El código vive en `code/00-setup-check/`.
 
 ```bash
 cd code/00-setup-check
@@ -263,27 +358,33 @@ pnpm install
 pnpm smoke-test
 ```
 
-**Salida esperada (los valores varían):**
+**Salida esperada (los valores varían según los proveedores que tengas):**
 
 ```
 == Curso AI Engineer — Smoke Test ==
 
-Verificando variables de entorno...
-  OK: ANTHROPIC_API_KEY presente
+Detectando proveedores configurados...
+  [OK]   Ollama (local)         qwen2.5:7b
+  [OK]   Google Gemini          gemini-2.0-flash-exp
+  [SKIP] Anthropic Claude       (ANTHROPIC_API_KEY no definida)
+  [SKIP] OpenAI                 (OPENAI_API_KEY no definida)
 
-Llamando a la API de Anthropic...
-  Modelo: claude-haiku-4-5-20251001
-  Mensaje: "Saluda en español en 5 palabras o menos"
+Probando proveedores disponibles...
 
-Respuesta recibida:
-  "¡Hola! ¿Cómo estás?"
+[Ollama (local) — qwen2.5:7b]
+  Respuesta:    "¡Hola, mucho gusto!"
+  Tokens:       in=18 out=7
+  Costo:        USD 0.00000 (local)
+  Tiempo:       1.234 s
 
-Métricas:
-  Input tokens:    18
-  Output tokens:    8
-  Costo aprox:    USD 0.00003
+[Google Gemini — gemini-2.0-flash-exp]
+  Respuesta:    "¡Hola! ¿Cómo estás?"
+  Tokens:       in=14 out=8
+  Costo:        USD 0.00000 (free tier)
+  Tiempo:       0.621 s
 
 == Setup verificado correctamente ==
+2 de 2 proveedores configurados respondieron correctamente.
 ```
 
 Si llegas hasta aquí con éxito, **estás listo para empezar el curso**.
@@ -292,14 +393,31 @@ Si llegas hasta aquí con éxito, **estás listo para empezar el curso**.
 
 ## 7. Solución de problemas comunes
 
-### `Error: ANTHROPIC_API_KEY not set`
-- Verifica que `.env` existe en la raíz del repo (no dentro de `code/`).
-- Verifica que la línea `ANTHROPIC_API_KEY=...` no tiene espacios alrededor del `=`.
-- Asegúrate de que la key no está entre comillas.
+### El smoke test dice `Ningún proveedor configurado`
+- Asegúrate de tener al menos uno de estos en tu `.env`:
+  `GOOGLE_GENERATIVE_AI_API_KEY`, `OLLAMA_BASE_URL`, `ANTHROPIC_API_KEY` u `OPENAI_API_KEY`.
+- Verifica que `.env` existe en la **raíz del repo** (no dentro de `code/`).
+- Verifica que las líneas `KEY=valor` no tienen espacios alrededor del `=` ni comillas.
 
-### `Error 401 Unauthorized` al llamar a Anthropic
-- La key está mal copiada o caducada.
-- La cuenta no tiene créditos. Carga saldo en la consola.
+### Error 401 Unauthorized en cualquier proveedor cloud
+- La key está mal copiada o caducada — vuelve a generar una en la consola del proveedor.
+- La cuenta no tiene créditos o cuota disponible.
+
+### `Ollama: connect ECONNREFUSED 127.0.0.1:11434`
+- Ollama no está corriendo. Ejecuta `ollama serve` en una terminal separada (o asegúrate de que el daemon esté activo, p.ej. `systemctl status ollama` en Linux).
+- Si usas Docker, levanta el profile: `docker compose --profile local-llm up -d`.
+
+### `Ollama: model not found`
+- El modelo configurado en `OLLAMA_MODEL` no está descargado. Ejecuta `ollama pull <nombre-del-modelo>` (por ejemplo, `ollama pull qwen2.5:7b`).
+- Lista los modelos descargados con `ollama list`.
+
+### Ollama responde extremadamente lento o satura el CPU
+- La inferencia está corriendo en CPU porque la GPU no fue detectada.
+- Verifica drivers de GPU y revisa los logs de Ollama (`journalctl -u ollama -f` en Linux con systemd, o la salida de `ollama serve`).
+- Como alternativa, usa Gemini (cloud, free tier) hasta resolver la GPU.
+
+### Gemini: `429 RESOURCE_EXHAUSTED`
+- Has excedido la cuota gratuita (15 req/min o 1500 req/día). Espera unos minutos o cambia temporalmente a Ollama.
 
 ### `connect ECONNREFUSED 127.0.0.1:5432`
 - Postgres no está corriendo. Ejecuta `docker compose up -d postgres`.

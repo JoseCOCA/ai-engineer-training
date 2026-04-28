@@ -1,18 +1,22 @@
 {
   "name": "@curso-ai/setup-check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Smoke test del entorno del curso — verifica que la API de Anthropic responde",
+  "description": "Smoke test multi-provider del entorno del curso — detecta qué proveedores LLM están configurados y verifica que cada uno responda",
   "scripts": {
     "smoke-test": "tsx --env-file=../../.env smoke-test.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.40.0"
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "ollama-ai-provider": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "tsx": "^4.20.0",
-    "typescript": "^5.7.0",
-    "@types/node": "^22.0.0"
+    "typescript": "^5.7.0"
   }
 }
