@@ -28,10 +28,10 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
 
 ## Cómo usar este repo
 
-1. Empezá por [`docs/00-curriculum.md`](docs/00-curriculum.md) — el diseño curricular maestro. **Léelo antes de tocar código.**
-2. Seguí con [`docs/01-setup.md`](docs/01-setup.md) — instalación y configuración del entorno.
-3. Si venís de JS/TS sin Python, leé [`docs/02-python-para-js-devs.md`](docs/02-python-para-js-devs.md).
-4. Recorré los módulos en orden. Cada sesión vive en `docs/modulos/MM-modulo/sesion-NN-tema/` y tiene:
+1. Empieza por [`docs/00-curriculum.md`](docs/00-curriculum.md) — el diseño curricular maestro. **Léelo antes de tocar código.**
+2. Sigue con [`docs/01-setup.md`](docs/01-setup.md) — instalación y configuración del entorno.
+3. Si vienes de JS/TS sin Python, lee [`docs/02-python-para-js-devs.md`](docs/02-python-para-js-devs.md).
+4. Recorre los módulos en orden. Cada sesión vive en `docs/modulos/MM-modulo/sesion-NN-tema/` y tiene:
    - `README.md` — teoría
    - `ejercicios.md` — práctica guiada
    - `recursos.md` — lecturas y referencias
@@ -63,7 +63,7 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
 │   ├── m06-llmops/
 │   └── proyecto-integrador/
 ├── docker-compose.yml
-└── .env.example
+└── env.example                   ← copiar a .env (ver docs/01-setup.md)
 ```
 
 ## Mapa de los 6 módulos
@@ -83,4 +83,4 @@ Detalle completo en [`docs/00-curriculum.md`](docs/00-curriculum.md).
 
 ## Licencia
 
-Material educativo. Compartilo, mejoralo, criticalo.
+Material educativo. Compártelo, mejóralo, critícalo.

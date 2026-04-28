@@ -8,8 +8,8 @@
 
 El curso se construye sobre tres principios que vas a ver repetidos hasta el cansancio:
 
-1. **Conceptos antes que código.** Un AI Engineer no es alguien que copia ejemplos de la documentación de OpenAI — es alguien que entiende qué problema está resolviendo, por qué la arquitectura X es mejor que la Y, y qué tradeoffs estás aceptando cuando elegís un framework.
-2. **La IA es una herramienta. Vos dirigís, la IA ejecuta.** El humano siempre lidera. No vamos a tratar al LLM como una caja mágica — vamos a entenderlo como un componente más, con su propio modelo de costes, latencias, modos de fallar y patrones de uso correcto.
+1. **Conceptos antes que código.** Un AI Engineer no es alguien que copia ejemplos de la documentación de OpenAI — es alguien que entiende qué problema está resolviendo, por qué la arquitectura X es mejor que la Y, y qué tradeoffs estás aceptando cuando eliges un framework.
+2. **La IA es una herramienta. Tú diriges, la IA ejecuta.** El humano siempre lidera. No vamos a tratar al LLM como una caja mágica — vamos a entenderlo como un componente más, con su propio modelo de costes, latencias, modos de fallar y patrones de uso correcto.
 3. **Cimientos sólidos antes que frameworks.** Vamos a entender qué hace LangChain ANTES de usar LangChain. Vamos a entender qué es un embedding ANTES de elegir una BBDD vectorial. Si el framework desaparece mañana, lo que aprendiste sigue valiendo.
 
 **Lo que este curso NO es:**
@@ -43,7 +43,7 @@ El curso usa **TypeScript como lenguaje principal** y **Python solo donde es est
 
 | Capa | Lenguaje | Por qué |
 |------|----------|---------|
-| App layer (wrappers, agentes, RAG, APIs, UI) | **TypeScript** | El SDK de Anthropic, Vercel AI SDK, LangChain.js y LangGraph.js están maduros. Si venís de backend JS/TS, aprovechás 100% tu skill. |
+| App layer (wrappers, agentes, RAG, APIs, UI) | **TypeScript** | El SDK de Anthropic, Vercel AI SDK, LangChain.js y LangGraph.js están maduros. Si vienes de backend JS/TS, aprovechas 100% tu skill. |
 | Embeddings con HuggingFace, evaluación con RAGAS, scripts ML específicos | **Python** | Ecosistema irrenunciable en estos puntos puntuales. |
 
 Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge `[Python]`. El resto es TS por defecto.
@@ -66,7 +66,7 @@ Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge 
 | Evaluación LLMs | Promptfoo (TS), RAGAS (Python) | Módulo 4 + transversal |
 | Deployment | Docker, docker-compose, Cloud Run / Railway | Módulo 6 |
 
-Todo corre **localmente** vía `docker-compose`. No necesitás cuenta cloud ni tarjeta para hacer el curso (excepto para los proveedores LLM, que tienen tier gratis en general).
+Todo corre **localmente** vía `docker-compose`. No necesitas cuenta cloud ni tarjeta para hacer el curso (excepto para los proveedores LLM, que tienen tier gratis en general).
 
 ## 5. Mapa de aprendizaje y dependencias entre módulos
 
@@ -210,13 +210,13 @@ code/mMM-modulo/sesion-NN/
 **Cada README de sesión tiene esta plantilla:**
 
 1. **Objetivos de aprendizaje** — al terminar esto vas a poder X, Y, Z.
-2. **Prerequisitos** — qué sesiones previas tenés que haber completado.
+2. **Prerequisitos** — qué sesiones previas tienes que haber completado.
 3. **Conceptos clave** — los 3-5 conceptos centrales con definiciones.
 4. **Teoría** — desarrollo del tema con diagramas y ejemplos.
 5. **Patrones y antipatrones** — qué hacer y qué evitar.
 6. **Conexión con el proyecto integrador** — qué de lo que aprendiste vas a aplicar al producto.
-7. **Resumen** — los 3 puntos que te tenés que llevar.
-8. **Preguntas de auto-evaluación** — si no podés responderlas, releé.
+7. **Resumen** — los 3 puntos que te tienes que llevar.
+8. **Preguntas de auto-evaluación** — si no puedes responderlas, relee.
 
 **Cada `ejercicios.md` tiene:**
 
@@ -229,7 +229,7 @@ code/mMM-modulo/sesion-NN/
 
 El curso es **autodidacta** pero está diseñado para evaluarte de forma honesta:
 
-1. **Preguntas de auto-evaluación** al final de cada README. Si no podés responderlas sin volver a leer, no aprendiste el concepto.
+1. **Preguntas de auto-evaluación** al final de cada README. Si no puedes responderlas sin volver a leer, no aprendiste el concepto.
 2. **Ejercicios prácticos** — código que tiene que correr y producir el output esperado.
 3. **Hito del proyecto integrador** al final de cada módulo. Es el indicador más fuerte de progreso real.
 4. **Retos opcionales** para empujarte más allá.
@@ -239,7 +239,7 @@ El curso es **autodidacta** pero está diseñado para evaluarte de forma honesta
 ## 10. Convenciones del repo
 
 ### Lenguaje y estilo
-- Markdown en español neutro.
+- Markdown en español neutro (sin voseo ni regionalismos).
 - Bloques de código con highlighting de lenguaje.
 - Diagramas en Mermaid (compatible con GitHub).
 - Tablas para comparativas y referencias rápidas.
@@ -296,10 +296,10 @@ El proyecto integrador usa **monorepo con pnpm workspaces** desde el Módulo 2 (
 ## 11. Cómo seguir el curso
 
 1. **No saltes módulos.** Cada uno depende del anterior.
-2. **Hacé los ejercicios.** Leer no es aprender — hacer es aprender.
-3. **Construí el proyecto integrador en paralelo.** No lo dejes para el final.
-4. **Si una sesión te lleva más del doble del tiempo estimado**, no te preocupes — ajustá el ritmo. Pero si te lleva menos de la mitad, probablemente la estás leyendo en piloto automático.
-5. **Si no podés explicarle el concepto a otra persona, no lo entendiste.** Probá explicárselo a un compañero, a un rubber duck o a una IA.
+2. **Haz los ejercicios.** Leer no es aprender — hacer es aprender.
+3. **Construye el proyecto integrador en paralelo.** No lo dejes para el final.
+4. **Si una sesión te lleva más del doble del tiempo estimado**, no te preocupes — ajusta el ritmo. Pero si te lleva menos de la mitad, probablemente la estás leyendo en piloto automático.
+5. **Si no puedes explicarle el concepto a otra persona, no lo entendiste.** Prueba explicárselo a un compañero, a un rubber duck o a una IA.
 
 ## 12. Roadmap del repo
 
