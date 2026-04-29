@@ -1,6 +1,6 @@
 {
   "name": "@curso-ai/proyecto-integrador",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "TiendaPro — agente de soporte conversacional para e-commerce. Proyecto integrador del curso AI Engineer.",
@@ -11,12 +11,9 @@
     "test:regression": "vitest run __tests__/prompts.regression.test.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^2.0.0",
-    "@ai-sdk/google": "^2.0.0",
-    "@ai-sdk/openai": "^2.0.0",
+    "@curso-ai/llm": "workspace:*",
     "ai": "^5.0.0",
     "gpt-tokenizer": "^3.0.0",
-    "ollama-ai-provider-v2": "^1.0.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {

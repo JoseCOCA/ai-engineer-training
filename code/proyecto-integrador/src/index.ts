@@ -1,16 +1,20 @@
 /**
- * TiendaPro — hito M2 del proyecto integrador.
+ * TiendaPro — proyecto integrador.
  *
  * Conversación de 5 turnos con asistente con personalidad.
- * Demuestra todo lo construido en el Módulo 2:
- *   - chat service (S03) con retry/fallback/instrumentación.
- *   - clasificación de intent estructurada (S04).
- *   - guardrails de input/output (S04).
- *   - inyección de contexto desde catálogo (S05.1).
- *   - memoria conversacional con sliding window (S05.2).
- *   - prompts versionados desde archivos (S05.3).
+ * Estado al cierre del Módulo 2:
+ *   - chat service desde @curso-ai/llm (retry/fallback/instrumentación).
+ *   - logging vía onComplete callback → logs/calls.jsonl.
+ *   - clasificación de intent estructurada con Zod.
+ *   - guardrails de input/output.
+ *   - inyección de contexto desde catálogo (query-then-inject).
+ *   - memoria conversacional con sliding window por tokens.
+ *   - prompts versionados desde archivos.
+ *
+ * En Módulo 3 reemplazamos el findProducts() (keyword) por búsqueda
+ * semántica con embeddings + pgvector.
  */
-import { chat } from "./lib/chat.js";
+import { chat, ConversationStore, newId } from "@curso-ai/llm";
 import { classifyIntent } from "./lib/intent.js";
 import {
   GuardrailViolation,
@@ -18,8 +22,8 @@ import {
   validateOutput,
 } from "./lib/guardrails.js";
 import { findProducts } from "./lib/catalog.js";
-import { ConversationStore, newId } from "./lib/conversation.js";
-import { render } from "./lib/prompt-template.js";
+import { logChatResponse } from "./lib/logger.js";
+import { render } from "./lib/prompts.js";
 
 const USER_NAME = "Carlos";
 const LOCALE = "es-ES";
@@ -85,6 +89,7 @@ async function runConversation(): Promise<void> {
       })),
       flow: `chat-${intent.intent}`,
       maxOutputTokens: 300,
+      onComplete: logChatResponse,
     });
 
     try {

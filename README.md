@@ -20,7 +20,7 @@ Curso completo de AI Engineer construido como **repositorio público de aprendiz
 | LLM proveedores | Ollama (local), Google Gemini (free tier), Anthropic Claude (comparativa), OpenAI (comparativa) |
 | Capa de abstracción | **Vercel AI SDK** — proveedor-agnóstico desde el día 1 |
 | App framework | LangChain.js, LangGraph.js |
-| BBDD vectorial | PostgreSQL + pgvector (principal), Qdrant, Pinecone, Chroma (comparativa) |
+| BBDD vectorial | PostgreSQL + pgvector (principal), Qdrant (comparativa) |
 | Observabilidad | Langfuse (principal), LangSmith, Logfire |
 | Evaluación | Promptfoo, RAGAS, DeepEval |
 | Deployment | Docker, docker-compose, Cloud Run / Railway |
@@ -36,7 +36,7 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
    - `README.md` — teoría
    - `ejercicios.md` — práctica guiada
    - `recursos.md` — lecturas y referencias
-5. El código de cada sesión vive en `code/mMM-modulo/sesion-NN/`.
+5. El código de cada sesión vive en `code/mMM-modulo/sesion-NN/` (sandbox autónomo, clonable y ejecutable aisladamente).
 6. El proyecto integrador (agente de soporte e-commerce) vive en `code/proyecto-integrador/` y se construye módulo a módulo.
 
 ## Estructura del repo
@@ -44,33 +44,38 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
 ```
 .
 ├── docs/
-│   ├── 00-curriculum.md          ← diseño curricular maestro
+│   ├── 00-curriculum.md             ← diseño curricular maestro
 │   ├── 01-setup.md
 │   ├── 02-python-para-js-devs.md
-│   ├── modulos/
-│   │   ├── 01-fundamentos/
-│   │   ├── 02-cag/
-│   │   ├── 03-data-driven/
-│   │   ├── 04-rag/
-│   │   ├── 05-agentes/
-│   │   └── 06-llmops/
-│   └── proyectos/
-├── code/
-│   ├── m01-fundamentos/
+│   └── modulos/
+│       ├── 01-fundamentos/
+│       ├── 02-patrones-llm/
+│       ├── 03-embeddings/
+│       ├── 04-rag/
+│       ├── 05-agentes/
+│       └── 06-llmops/
+├── code/                            ← monorepo pnpm workspace
+│   ├── 00-setup-check/              ← smoke test del entorno
+│   ├── packages/
+│   │   └── llm/                     ← @curso-ai/llm (frontera consolidada en M2)
+│   ├── m01-fundamentos/             ← sandboxes por sesión (autocontenidos)
 │   ├── m02-patrones-llm/
 │   ├── m03-embeddings/
 │   ├── m04-rag/
 │   ├── m05-agentes/
 │   ├── m06-llmops/
-│   └── proyecto-integrador/
+│   └── proyecto-integrador/         ← TiendaPro, consume @curso-ai/llm
+├── pnpm-workspace.yaml
 ├── docker-compose.yml
-└── env.example                   ← copiar a .env (ver docs/01-setup.md)
+└── env.example                      ← copiar a .env (ver docs/01-setup.md)
 ```
+
+**Nota:** los sandboxes de cada sesión (`code/mMM-modulo/sesion-NN/`) son **autocontenidos**: tienen su propio `package.json` y duplican la abstracción multi-provider para que el alumno pueda clonar/copiar una sesión y correrla aisladamente. El proyecto integrador, en cambio, consume el package compartido `@curso-ai/llm` para evolucionar sin duplicación entre sesiones.
 
 ## Mapa de los 6 módulos
 
-1. **Fundamentos de productos con IA** — qué es un AI Engineer, panorama LLM, primera llamada API.
-2. **Patrones de aplicaciones LLM** — wrappers, prompts estructurados, contexto, memoria conversacional, guardrails.
+1. **Fundamentos de productos con IA** — qué es un AI Engineer, panorama LLM, primera llamada API. *(cerrado, tag `proyecto-m1`)*
+2. **Patrones de aplicaciones LLM** — wrappers, prompts estructurados, contexto, memoria conversacional, guardrails. *(cerrado, tag `proyecto-m2`)*
 3. **Embeddings y búsqueda vectorial** — chunking, embeddings, BBDD vectoriales, búsqueda semántica.
 4. **Arquitectura RAG** — retrieval, reranking, generación con citas, evaluación de calidad.
 5. **Orquestación de agentes** — function calling, LangGraph, multi-agente.
@@ -81,6 +86,22 @@ Detalle completo en [`docs/00-curriculum.md`](docs/00-curriculum.md).
 ## Estado del curso
 
 🚧 **En desarrollo.** Las sesiones se publican en orden. Cada commit corresponde a una sesión completa o un hito del repo.
+
+## Setup rápido
+
+```bash
+# 1. Configura el .env (al menos un proveedor LLM)
+cp env.example .env
+
+# 2. Instala todas las dependencias del workspace
+pnpm install
+
+# 3. Verifica que el entorno funciona
+pnpm run smoke-test
+
+# 4. Corre el proyecto integrador en su estado actual
+pnpm dev
+```
 
 ## Licencia
 

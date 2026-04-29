@@ -4,8 +4,8 @@
  */
 import { generateObject } from "ai";
 import { z } from "zod";
-import { buildModel, PRIMARY_PROVIDER } from "./providers.js";
-import { render } from "./prompt-template.js";
+import { buildModel, PRIMARY_PROVIDER } from "@curso-ai/llm";
+import { render } from "./prompts.js";
 
 export const intentSchema = z.object({
   intent: z

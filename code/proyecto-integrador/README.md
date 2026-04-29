@@ -6,27 +6,33 @@ Asistente conversacional para un e-commerce ficticio. Crece módulo a módulo a 
 
 **Asistente conversacional con personalidad.** Capacidades implementadas:
 
-- **Chat service propio** (`src/lib/chat.ts`) — wrapper sobre Vercel AI SDK con retry exponencial + fallback al proveedor secundario + instrumentación por flow.
+- **Chat service** — consume `chat()` y `chatStream()` desde `@curso-ai/llm` (workspace package). Retry exponencial + fallback al proveedor secundario + instrumentación por flow + onComplete callback para logging.
+- **Logger propio** (`src/lib/logger.ts`) — sink local que escribe `logs/calls.jsonl` desde el callback de `@curso-ai/llm`.
 - **Clasificación estructurada de intent** (`src/lib/intent.ts`) — `generateObject` + Zod sobre `pregunta | reclamo | derivar`.
 - **Guardrails** de input/output (`src/lib/guardrails.ts`) — patrones sospechosos, longitud, mención de competidores.
 - **Inyección de contexto** desde catálogo (`src/lib/catalog.ts` + `data/catalog.json`) usando query-then-inject.
-- **Memoria conversacional** (`src/lib/conversation.ts`) con sliding window por tokens.
-- **Prompts versionados** en `prompts/` con render desde archivo (`src/lib/prompt-template.ts`).
+- **Memoria conversacional** — `ConversationStore` desde `@curso-ai/llm` con sliding window por tokens.
+- **Prompts versionados** en `prompts/` con renderer bound al directorio del proyecto (`src/lib/prompts.ts` usa `makePromptRenderer` de `@curso-ai/llm`).
 - **Tests** (snapshot + regression) en `__tests__/` con Vitest.
 
 ## Setup
 
+Desde la **raíz del repo** (no desde aquí):
+
 ```bash
-cd code/proyecto-integrador
-pnpm install
+pnpm install   # instala todo el workspace, incluyendo @curso-ai/llm
 ```
 
-`.env` configurado en la raíz del repo (siguiendo `env.example`). El proyecto reusa el `.env` de la raíz.
+`.env` configurado en la raíz del repo (siguiendo `env.example`).
 
 ## Ejecutar la conversación demo
 
 ```bash
+# Desde la raíz del repo:
 pnpm dev
+
+# O desde aquí:
+pnpm run dev
 ```
 
 Salida esperada (resumida):
@@ -43,7 +49,6 @@ Salida esperada (resumida):
   [intent: pregunta (0.95)]
   [products injected: 3]
   Para senderismo de 1-2 días te recomiendo la Mochila Trekker 30L...
-  ...
 ```
 
 ## Tests
@@ -58,7 +63,7 @@ pnpm run test:regression # solo regression sobre eval set (hace llamadas reales)
 
 Edita `DEFAULT_LLM_PROVIDER` en el `.env` de la raíz. Valores: `ollama` | `google` | `anthropic` | `openai`.
 
-**No necesitas tocar el código** — la abstracción en `src/lib/providers.ts` se encarga.
+**No necesitas tocar el código** — la abstracción en `@curso-ai/llm` se encarga.
 
 ## Estructura
 
@@ -75,22 +80,18 @@ data/
 src/
 ├── index.ts                     ← demo de conversación de 5 turnos
 └── lib/
-    ├── providers.ts             ← buildModel(provider) (la única pieza que importa SDKs)
-    ├── pricing.ts               ← snapshot de precios USD/1M
-    ├── retry.ts                 ← withRetry + defaultShouldRetry
-    ├── logger.ts                ← appendLog → logs/calls.jsonl
-    ├── chat.ts                  ← chat() y chatStream() (la frontera del producto)
     ├── intent.ts                ← classifyIntent con generateObject + Zod
     ├── guardrails.ts            ← validateInput / validateOutput
-    ├── catalog.ts               ← findProducts(query) sobre catalog.json
-    ├── conversation.ts          ← ConversationStore con sliding window
-    ├── summarize.ts             ← summarizeOldMessages
-    └── prompt-template.ts       ← render(name, vars) con regex {{var}}
+    ├── catalog.ts               ← findProducts(query) sobre catalog.json (M3 lo cambia por embeddings)
+    ├── logger.ts                ← logChatResponse → logs/calls.jsonl
+    └── prompts.ts               ← render bound al directorio prompts/
 
 __tests__/
 ├── prompts.snapshot.test.ts     ← snapshot del template renderizado
 └── prompts.regression.test.ts   ← regression sobre eval-set.json
 ```
+
+La frontera del producto LLM (chat, retry, fallback, providers, conversation store, prompt-template engine) vive en `code/packages/llm/` (`@curso-ai/llm`).
 
 ## Hitos por módulo
 

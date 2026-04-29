@@ -1,12 +1,12 @@
 /**
  * ConversationStore — almacena el historial completo en memoria
- * y expone un getContextWindow(maxTokens) que decide qué mandar
- * al modelo en el próximo turno.
+ * y expone getContextWindow(maxTokens) que decide qué mandar al
+ * modelo en el próximo turno.
  *
  * Patrón: tu app es la dueña del historial. La API LLM es stateless.
  *
- * Persistencia simple a JSONL incluida (ver saveTo / loadFrom).
- * Para producción real, BD relacional con índices.
+ * Persistencia simple a JSONL incluida (saveTo / loadFrom). Para
+ * producción real, BD relacional con índices.
  */
 import { encode } from "gpt-tokenizer";
 import { appendFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";

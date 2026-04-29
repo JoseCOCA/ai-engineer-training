@@ -1,13 +1,6 @@
 /**
  * Retry con backoff exponencial + jitter.
- *
- * - maxRetries: cuántos intentos adicionales tras el primero.
- * - baseDelayMs: espera mínima inicial.
- * - factor: multiplicador entre intentos (típicamente 2 → exponencial).
- * - shouldRetry: predicado que decide si un error es transitorio.
- *
- * Patrón AWS estándar. Sin jitter, clusters grandes generan
- * tormentas sincronizadas que tiran al proveedor.
+ * Patrón AWS estándar.
  */
 export interface RetryOptions {
   maxRetries?: number;
@@ -28,7 +21,6 @@ export function defaultShouldRetry(error: unknown): boolean {
   if (!(error instanceof Error)) return false;
   const msg = error.message.toLowerCase();
 
-  // Errores transitorios — vale reintentar.
   if (msg.includes("429")) return true;
   if (msg.includes("rate limit")) return true;
   if (msg.includes("503")) return true;
@@ -40,7 +32,6 @@ export function defaultShouldRetry(error: unknown): boolean {
   if (msg.includes("fetch failed")) return true;
   if (msg.includes("network")) return true;
 
-  // 4xx (excepto 429), key inválida, prompt malformado: NO reintentar.
   return false;
 }
 

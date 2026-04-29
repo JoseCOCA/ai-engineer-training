@@ -1,13 +1,17 @@
 /**
- * Logger append-only a logs/calls.jsonl.
+ * Logger del proyecto integrador.
  *
- * Formato JSONL: una línea = un JSON. Lo más simple y portable
- * para análisis offline. En producción real, este logger envía
- * a Langfuse / Helicone / un OTel collector.
+ * Sink simple: append-only JSONL en logs/calls.jsonl.
+ * Recibe el ChatResponse de @curso-ai/llm vía el callback onComplete
+ * y lo serializa con timestamp.
+ *
+ * En producción real, este logger envía a Langfuse / Helicone /
+ * un OTel collector (lo cubrimos en M6).
  */
 import { appendFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import type { ChatResponse } from "@curso-ai/llm";
 
 const LOG_FILE = fileURLToPath(new URL("../../logs/calls.jsonl", import.meta.url));
 
@@ -19,9 +23,10 @@ function ensureInit(): void {
   initialized = true;
 }
 
-export function appendLog(record: object): void {
+export function logChatResponse(response: ChatResponse): void {
   ensureInit();
-  const line = JSON.stringify({ timestamp: new Date().toISOString(), ...record }) + "\n";
+  const line =
+    JSON.stringify({ timestamp: new Date().toISOString(), ...response }) + "\n";
   appendFileSync(LOG_FILE, line, "utf8");
 }
 

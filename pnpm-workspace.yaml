@@ -1,0 +1,13 @@
+packages:
+  # Setup smoke test
+  - "code/00-setup-check"
+
+  # Librerías compartidas (consumidas por proyecto-integrador)
+  - "code/packages/*"
+
+  # Sandboxes de sesiones — autocontenidos pero participan del workspace
+  # para que un solo `pnpm install` desde la raíz instale todo.
+  - "code/m0[1-6]-*/sesion-*"
+
+  # Proyecto integrador
+  - "code/proyecto-integrador"

@@ -1,9 +1,6 @@
 /**
- * Builders de modelo por proveedor.
- *
- * Diferencia con S02: en lugar de exportar un único `llm` resuelto
- * desde DEFAULT_LLM_PROVIDER, acá exponemos un `buildModel(provider)`
- * que el wrapper usa para resolver primario y fallback.
+ * Resolver de modelo según .env. La única pieza de la lib que importa
+ * SDKs específicos del proveedor.
  */
 import { type LanguageModel } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";

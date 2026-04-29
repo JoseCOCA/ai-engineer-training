@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { render } from "../src/lib/prompt-template.js";
+import { render } from "../src/lib/prompts.js";
 
 test("customer-support.system renders Ana es-AR", () => {
   const out = render("customer-support.system", {

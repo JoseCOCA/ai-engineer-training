@@ -1,13 +1,10 @@
 /**
- * Chat service — frontera del producto.
+ * Chat service — frontera del producto LLM.
  *
- * Lo único de la app que importa el SDK del proveedor LLM. El resto
- * del código (index.ts, intent.ts, summarize.ts) consume chat() y
- * chatStream() desde aquí.
- *
- * Incluye: defaults de producto, retry con backoff, fallback al
- * proveedor secundario, instrumentación (latencia/tokens/costo/flow)
- * y logging append-only a logs/calls.jsonl.
+ * El logging NO está acoplado: en lugar de escribir a un archivo
+ * internamente, emite la respuesta completa al callback opcional
+ * `onComplete`. El caller decide qué hacer (escribir a archivo,
+ * enviar a Langfuse, métricas, etc.).
  */
 import { generateText, streamText } from "ai";
 import {
@@ -18,7 +15,6 @@ import {
 } from "./providers.js";
 import { priceFor } from "./pricing.js";
 import { defaultShouldRetry, withRetry } from "./retry.js";
-import { appendLog } from "./logger.js";
 
 export interface ChatMessage {
   role: "user" | "assistant";
@@ -32,6 +28,7 @@ export interface ChatRequest {
   maxOutputTokens?: number;
   flow?: string;
   abortSignal?: AbortSignal;
+  onComplete?: (response: ChatResponse) => void;
 }
 
 export interface ChatResponse {
@@ -123,7 +120,7 @@ export async function chat(req: ChatRequest): Promise<ChatResponse> {
   }
 
   const fullResponse: ChatResponse = { ...response, attempts, fallbackUsed, flow };
-  appendLog(fullResponse);
+  req.onComplete?.(fullResponse);
   return fullResponse;
 }
 
@@ -189,7 +186,7 @@ export function chatStream(req: ChatRequest): ChatStreamResult {
         flow,
       };
 
-      appendLog(full);
+      req.onComplete?.(full);
       resolveFinished(full);
     } catch (error) {
       const isAbort =

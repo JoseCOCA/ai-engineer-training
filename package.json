@@ -1,0 +1,15 @@
+{
+  "name": "curso-ai",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Curso AI Engineer — repositorio público de aprendizaje. Workspace pnpm que agrupa el proyecto integrador, librerías compartidas y sandboxes de las sesiones.",
+  "scripts": {
+    "dev": "pnpm --filter @curso-ai/proyecto-integrador run dev",
+    "test": "pnpm --filter @curso-ai/proyecto-integrador run test",
+    "smoke-test": "pnpm --filter @curso-ai/setup-check run smoke-test"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

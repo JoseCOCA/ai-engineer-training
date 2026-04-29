@@ -5,9 +5,8 @@
  * Carga el system prompt desde prompts/summarizer.system.md.
  */
 import { generateText } from "ai";
-import { buildModel, PRIMARY_PROVIDER } from "./providers.js";
-import { render } from "./prompt-template.js";
-import type { ChatMessage } from "./chat.js";
+import { buildModel, PRIMARY_PROVIDER, type ChatMessage } from "@curso-ai/llm";
+import { render } from "./prompts.js";
 
 export async function summarizeOldMessages(messages: ChatMessage[]): Promise<string> {
   const { model } = buildModel(PRIMARY_PROVIDER);
