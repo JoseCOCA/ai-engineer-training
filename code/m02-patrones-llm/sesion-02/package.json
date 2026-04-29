@@ -1,0 +1,27 @@
+{
+  "name": "@curso-ai/m02-sesion-02",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S02 — Mecánica básica del LLM (tokens, contexto, parámetros, streaming).",
+  "scripts": {
+    "temperature": "tsx --env-file=../../../.env src/temperature.ts",
+    "tokenize": "tsx src/tokenize.ts",
+    "streaming": "tsx --env-file=../../../.env src/streaming.ts",
+    "max-tokens": "tsx --env-file=../../../.env src/max-tokens.ts",
+    "stop-sequences": "tsx --env-file=../../../.env src/stop-sequences.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "gpt-tokenizer": "^3.0.0",
+    "ollama-ai-provider-v2": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
