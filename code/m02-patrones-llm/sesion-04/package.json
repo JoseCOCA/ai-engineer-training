@@ -1,0 +1,27 @@
+{
+  "name": "@curso-ai/m02-sesion-04",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S04 — Salidas estructuradas, JSON, guardrails.",
+  "scripts": {
+    "intent": "tsx --env-file=../../../.env src/intent-demo.ts",
+    "order": "tsx --env-file=../../../.env src/order-demo.ts",
+    "guardrails": "tsx --env-file=../../../.env src/guardrails-demo.ts",
+    "stream-object": "tsx --env-file=../../../.env src/stream-object-demo.ts",
+    "validator": "tsx --env-file=../../../.env src/validator-demo.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "ollama-ai-provider-v2": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
