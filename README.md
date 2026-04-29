@@ -92,4 +92,4 @@ Este repositorio usa **licenciamiento dual** para distinguir entre código y con
 **Atribución sugerida si reutilizas el material:**
 
 > "Curso de AI Engineer" por José Coca, licenciado bajo CC BY 4.0.
-> Fuente: https://github.com/JoseCOCA/curso-ai
+> Fuente: https://github.com/JoseCOCA/ai-engineer-training
