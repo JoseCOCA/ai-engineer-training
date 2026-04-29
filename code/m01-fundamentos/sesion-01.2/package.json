@@ -1,0 +1,22 @@
+{
+  "name": "@curso-ai/sesion-01.2-comparativa",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Script de comparativa multi-provider para S01.2 — corre el mismo prompt contra todos los proveedores configurados y reporta tokens, costo, latencia y throughput.",
+  "scripts": {
+    "compare": "tsx --env-file=../../../.env compare.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "ollama-ai-provider-v2": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
