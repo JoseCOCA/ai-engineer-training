@@ -1,0 +1,22 @@
+{
+  "name": "@curso-ai/m03-sesion-06",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S06 — Por qué embeddings (del texto al vector).",
+  "scripts": {
+    "compare": "tsx --env-file=../../../.env src/compare.ts",
+    "similarity": "tsx --env-file=../../../.env src/similarity-matrix.ts",
+    "faq": "tsx --env-file=../../../.env src/faq-matching.ts",
+    "duplicates": "tsx --env-file=../../../.env src/duplicate-detection.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
+    "ai": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
