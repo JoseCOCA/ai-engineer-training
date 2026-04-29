@@ -310,9 +310,9 @@ El proyecto integrador usa **monorepo con pnpm workspaces** desde el Módulo 2 (
 ## 12. Roadmap del repo
 
 - [x] Estructura base + README + curriculum maestro
-- [ ] `01-setup.md` — instalación del entorno
-- [ ] `02-python-para-js-devs.md` — Python primer
-- [ ] Módulo 1 — Fundamentos (5 sesiones)
+- [x] `01-setup.md` — instalación del entorno
+- [x] `02-python-para-js-devs.md` — Python primer
+- [x] Módulo 1 — Fundamentos (5 sesiones) — tag `proyecto-m1`
 - [ ] Módulo 2 — Patrones de aplicaciones LLM (6 sesiones)
 - [ ] Módulo 3 — Embeddings y búsqueda vectorial (5 sesiones)
 - [ ] Módulo 4 — RAG (5 sesiones)

@@ -50,3 +50,16 @@ Razón de fin: stop
 ## Documentación pedagógica
 
 Esta sesión se desarrolla en [`docs/modulos/01-fundamentos/sesion-01.1-setup-primera-llamada/`](../../docs/modulos/01-fundamentos/sesion-01.1-setup-primera-llamada/).
+
+## Proveedor por defecto del Módulo 1
+
+Tras la comparativa de [S01.2](../../docs/modulos/01-fundamentos/sesion-01.2-respuesta-comparativa/), la recomendación canónica del curso para el MVP de TiendaPro es **Google Gemini 2.5 Flash** porque:
+
+- **Free tier amplio** (~1.500 req/día) — no obstaculiza el desarrollo ni los ejercicios.
+- **Cloud-only**, no requiere hardware local potente (ideal para alumnos con cualquier setup).
+- **Latencia razonable** para MVP (~13s en respuestas de ~300 tokens, según comparativa de S01.2).
+- **Costo proyectado** a 10K mensajes/día ≈ **$104/mes** (vs ~$385/mes con Claude Haiku 4.5).
+
+Esta es **una recomendación, no una imposición**. Si preferís trabajar offline o con otro proveedor, cambiá `DEFAULT_LLM_PROVIDER` en `.env` a `ollama`, `anthropic` u `openai` según necesidad. La abstracción multi-provider absorbe el cambio.
+
+A revisar en **Módulo 4** cuando podamos comparar proveedores con métricas de calidad rigurosas (RAGAS, Promptfoo).
