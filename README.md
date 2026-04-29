@@ -57,8 +57,8 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
 │   └── proyectos/
 ├── code/
 │   ├── m01-fundamentos/
-│   ├── m02-cag/
-│   ├── m03-data-driven/
+│   ├── m02-patrones-llm/
+│   ├── m03-embeddings/
 │   ├── m04-rag/
 │   ├── m05-agentes/
 │   ├── m06-llmops/
@@ -70,8 +70,8 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
 ## Mapa de los 6 módulos
 
 1. **Fundamentos de productos con IA** — qué es un AI Engineer, panorama LLM, primera llamada API.
-2. **Arquitecturas CAG (Cache Augmented Generation)** — wrappers de modelos, gestión de contexto, productos conversacionales.
-3. **Data-driven AI** — embeddings, BBDD vectoriales, normalización de datos.
+2. **Patrones de aplicaciones LLM** — wrappers, prompts estructurados, contexto, memoria conversacional, guardrails.
+3. **Embeddings y búsqueda vectorial** — chunking, embeddings, BBDD vectoriales, búsqueda semántica.
 4. **Arquitectura RAG** — retrieval, reranking, generación con citas, evaluación de calidad.
 5. **Orquestación de agentes** — function calling, LangGraph, multi-agente.
 6. **Despliegue y puesta en producción** — LLMOps, observabilidad, costes, Spec-Driven Development.
@@ -84,4 +84,12 @@ Detalle completo en [`docs/00-curriculum.md`](docs/00-curriculum.md).
 
 ## Licencia
 
-Material educativo. Compártelo, mejóralo, critícalo.
+Este repositorio usa **licenciamiento dual** para distinguir entre código y contenido pedagógico:
+
+- **Código** — todo lo que vive en `code/`, los bloques de código dentro de la documentación, y los archivos de configuración (`package.json`, `docker-compose.yml`, `env.example`, etc.) está licenciado bajo [**MIT**](LICENSE). Libre uso comercial y privado con atribución.
+- **Contenido pedagógico** — `README.md`, todo lo que vive en `docs/` y el material escrito de las sesiones está licenciado bajo [**Creative Commons Attribution 4.0 International (CC BY 4.0)**](LICENSE-CONTENT). Libre uso comercial y derivados con atribución obligatoria al autor.
+
+**Atribución sugerida si reutilizas el material:**
+
+> "Curso de AI Engineer" por José Coca, licenciado bajo CC BY 4.0.
+> Fuente: https://github.com/JoseCOCA/curso-ai

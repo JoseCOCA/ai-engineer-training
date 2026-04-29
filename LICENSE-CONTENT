@@ -1,0 +1,73 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 José Coca
+
+The educational content in this repository is licensed under the Creative
+Commons Attribution 4.0 International License (CC BY 4.0).
+
+You are free to:
+
+  - Share — copy and redistribute the material in any medium or format.
+  - Adapt — remix, transform, and build upon the material for any purpose,
+    even commercially.
+
+Under the following terms:
+
+  - Attribution — You must give appropriate credit, provide a link to the
+    license, and indicate if changes were made. You may do so in any
+    reasonable manner, but not in any way that suggests the licensor
+    endorses you or your use.
+
+  - No additional restrictions — You may not apply legal terms or
+    technological measures that legally restrict others from doing anything
+    the license permits.
+
+Notices:
+
+  - You do not have to comply with the license for elements of the material
+    in the public domain or where your use is permitted by an applicable
+    exception or limitation.
+
+  - No warranties are given. The license may not give you all of the
+    permissions necessary for your intended use. For example, other rights
+    such as publicity, privacy, or moral rights may limit how you use the
+    material.
+
+---
+
+SCOPE
+
+This CC BY 4.0 License applies to the EDUCATIONAL CONTENT of this
+repository, specifically:
+
+  - README.md
+  - All files under `docs/`
+  - All written course material (lessons, exercises, explanatory text)
+  - Diagrams, illustrations, and figures authored for the course
+
+This license does NOT cover the source code in this repository (under
+`code/`, code blocks within documentation, configuration files), which is
+licensed separately under the MIT License. See LICENSE for details.
+
+---
+
+SUGGESTED ATTRIBUTION
+
+When reusing or adapting this content, please credit the author as follows:
+
+  "Curso de AI Engineer" by José Coca, licensed under CC BY 4.0.
+  Source: https://github.com/JoseCOCA/curso-ai
+
+---
+
+FULL LEGAL CODE
+
+The summary above is a human-readable description of (and not a substitute
+for) the full license text. The complete legal text of CC BY 4.0 is
+available at:
+
+  https://creativecommons.org/licenses/by/4.0/legalcode
+
+The Creative Commons Deed (plain-language summary) is available at:
+
+  https://creativecommons.org/licenses/by/4.0/

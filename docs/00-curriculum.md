@@ -80,14 +80,14 @@ Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge 
 └──────────────────────────────────────────────────────────────────┘
                               ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│ Módulo 2: CAG                                                    │
-│  Wrappers, gestión de contexto, productos conversacionales       │
+│ Módulo 2: Patrones de aplicaciones LLM                           │
+│  Wrappers, prompts, contexto, salidas estructuradas, memoria     │
 │  → Construye el "asistente base" del proyecto integrador         │
 └──────────────────────────────────────────────────────────────────┘
                               ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│ Módulo 3: Data-driven AI                                         │
-│  Embeddings, vectoriales, normalización                          │
+│ Módulo 3: Embeddings y búsqueda vectorial                        │
+│  Chunking, embeddings, BBDD vectoriales, búsqueda semántica      │
 │  → Indexa el catálogo y FAQs del proyecto                        │
 └──────────────────────────────────────────────────────────────────┘
                               ▼
@@ -104,7 +104,7 @@ Cuando una sesión use Python, vas a verlo marcado explícitamente con un badge 
 └──────────────────────────────────────────────────────────────────┘
                               ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│ Módulo 6: LLMOps + Lab 10x Engineer                              │
+│ Módulo 6: LLMOps + Lab Productividad del AI Engineer             │
 │  Producción, observabilidad, costes, A/B testing                 │
 │  → El asistente se despliega y se mide en prod                   │
 └──────────────────────────────────────────────────────────────────┘
@@ -145,26 +145,26 @@ El temario original tiene 16 sesiones (S00 a S15) más un Lab. Algunas sesiones 
 | Sesión | Tema | Duración estim. | Status |
 |--------|------|-----------------|--------|
 | S00.1 | Panorama IA y rol del AI Engineer | 1h | Original (parte de S00) |
-| S00.2 | Transformers y por qué importan (caja negra suficiente) | 1h | Original (parte de S00) |
+| S00.2 | Cómo funciona un LLM por dentro (lo justo para construir bien) | 1h | Original (parte de S00) |
 | S00.3 | Python para devs JS/TS | 1h | **Nueva** (onboarding) |
-| S01.1 | Setup del entorno + primera llamada a Anthropic | 1h | Original (parte de S01) |
+| S01.1 | Setup del entorno + primera llamada a un LLM | 1h | Original (parte de S01) |
 | S01.2 | Estructura de la respuesta + comparativa proveedores | 1h | Original (parte de S01) |
 
-### Módulo 2 — Arquitecturas CAG
+### Módulo 2 — Patrones de aplicaciones LLM
 | Sesión | Tema | Duración estim. |
 |--------|------|-----------------|
-| S02 | Primeros pasos CAG: tokens, contexto, parámetros, tools | 2h |
-| S03 | Patrones de wrappers de modelos | 2h |
-| S04 | Productos IA avanzados: prompts estructurados, JSON, guardrails | 2h |
-| S05.1 | Contexto dinámico desde fuentes externas (archivos, web, BD) | 1.5h |
+| S02 | Mecánica básica de un LLM: tokens, contexto, parámetros y tools | 2h |
+| S03 | Wrappers y abstracciones sobre el modelo | 2h |
+| S04 | Salidas estructuradas, JSON y guardrails | 2h |
+| S05.1 | Inyección de contexto desde archivos, web y bases de datos | 1.5h |
 | S05.2 | Memoria conversacional e historial | 1h |
-| S05.3 | Prompts adaptativos por permisos + testing del sistema | 1.5h |
+| S05.3 | Personalización de prompts por usuario/rol + testing | 1.5h |
 
-### Módulo 3 — Data-driven AI
+### Módulo 3 — Embeddings y búsqueda vectorial
 | Sesión | Tema | Duración estim. |
 |--------|------|-----------------|
-| S06 | Fundamentos de data-driven AI | 2h |
-| S07.1 | Chunking de información y agentes de chunking | 1h |
+| S06 | Por qué embeddings: del texto al vector | 2h |
+| S07.1 | Chunking de documentos: estrategias y trade-offs | 1h |
 | S07.2 | Teoría de embeddings y modelos | 1.5h |
 | S07.3 | Espacio vectorial, búsqueda semántica y pre-procesamiento | 1.5h |
 | S08 | Bases de datos vectoriales | 2h |
@@ -174,25 +174,25 @@ El temario original tiene 16 sesiones (S00 a S15) más un Lab. Algunas sesiones 
 |--------|------|-----------------|
 | S09 | Fundamentos de RAG y técnicas de recuperación | 2h |
 | S10 | Técnicas avanzadas de recuperación | 2h |
-| S11.1 | Content augmentation y síntesis multi-fuente | 1h |
-| S11.2 | Citación, alucinaciones y reindexación | 1.5h |
+| S11.1 | Augmentación y combinación de contexto recuperado | 1h |
+| S11.2 | Citas, control de alucinaciones y mantenimiento del índice | 1.5h |
 | S11.3 | Evaluación de calidad con RAGAS y Promptfoo | 1.5h |
 
 ### Módulo 5 — Orquestación de agentes
 | Sesión | Tema | Duración estim. |
 |--------|------|-----------------|
 | S12 | Introducción a agentes de IA | 2h |
-| S13.1 | Frameworks vs orquestación interna | 1h |
+| S13.1 | Cuándo usar un framework de agentes y cuándo construir el tuyo | 1h |
 | S13.2 | LangGraph y grafos de ejecución | 1.5h |
 | S13.3 | Gestión de estado, errores y observabilidad de agentes | 1.5h |
 | S14.1 | Arquitecturas multi-agente y patrones de comunicación | 1.5h |
-| S14.2 | Human in the loop + seguridad y sandboxing | 1h |
+| S14.2 | Human-in-the-loop, seguridad y sandboxing | 1h |
 
 ### Módulo 6 — Despliegue y puesta en producción
 | Sesión | Tema | Duración estim. |
 |--------|------|-----------------|
 | S15 | LLMOps: producción, observabilidad, KPIs, costes, A/B testing | 2h |
-| Lab | 10x Engineer: Spec-Driven Development, agentes, MCPs, skills | 2h |
+| Lab | Productividad del AI Engineer: Spec-Driven Development, agentes, MCPs, skills | 2h |
 
 **Total estimado:** ~22 sesiones × 1.5h promedio ≈ **33h** de contenido, sin contar el tiempo de práctica del proyecto integrador (estimado 30-50h adicionales).
 
@@ -285,8 +285,11 @@ code/
 │   ├── sesion-00.1/
 │   ├── sesion-00.2/
 │   └── ...
-├── m02-cag/
-└── ...
+├── m02-patrones-llm/
+├── m03-embeddings/
+├── m04-rag/
+├── m05-agentes/
+├── m06-llmops/
 └── proyecto-integrador/
     ├── README.md           ← qué es y cómo correrlo
     ├── apps/
@@ -310,12 +313,29 @@ El proyecto integrador usa **monorepo con pnpm workspaces** desde el Módulo 2 (
 - [ ] `01-setup.md` — instalación del entorno
 - [ ] `02-python-para-js-devs.md` — Python primer
 - [ ] Módulo 1 — Fundamentos (5 sesiones)
-- [ ] Módulo 2 — CAG (6 sesiones)
-- [ ] Módulo 3 — Data-driven AI (5 sesiones)
+- [ ] Módulo 2 — Patrones de aplicaciones LLM (6 sesiones)
+- [ ] Módulo 3 — Embeddings y búsqueda vectorial (5 sesiones)
 - [ ] Módulo 4 — RAG (5 sesiones)
 - [ ] Módulo 5 — Orquestación de agentes (6 sesiones)
 - [ ] Módulo 6 — LLMOps + Lab (2 sesiones)
 - [ ] Proyecto integrador completo desplegado
+
+## 13. Referencias de syllabi públicos del dominio
+
+Este temario converge con el cuerpo de conocimiento abierto de AI Engineering. Si quieres contrastar el alcance del curso con otros materiales públicos, o profundizar en un tema concreto, estos son los recursos de referencia:
+
+- **Andrej Karpathy** — *Intro to Large Language Models* y *Let's build GPT from scratch* (YouTube). Fundamentos accesibles para ingenieros.
+- **DeepLearning.AI Short Courses** — [deeplearning.ai/short-courses](https://www.deeplearning.ai/short-courses/). Catálogo amplio de cursos cortos y gratuitos sobre LLMs, RAG, agentes y evaluación.
+- **Hugging Face Course** — [huggingface.co/learn](https://huggingface.co/learn). NLP, transformers, deep learning aplicado y agentes.
+- **OpenAI Cookbook** — [cookbook.openai.com](https://cookbook.openai.com). Recetas prácticas de LLMs, function calling, embeddings, evaluación.
+- **Anthropic Courses** — [github.com/anthropics/courses](https://github.com/anthropics/courses). Prompt engineering, tool use y RAG con Claude.
+- **Chip Huyen** — *AI Engineering* (O'Reilly, 2024). Libro de referencia para el rol completo, alineado con el alcance de este curso.
+- **Hamel Husain & Jason Liu** — cursos en Maven sobre evaluación de LLMs y construcción de productos IA en producción.
+- **LangChain Academy** — [academy.langchain.com](https://academy.langchain.com). Agentes, LangGraph y observabilidad.
+- **Pinecone Learn** — [pinecone.io/learn](https://www.pinecone.io/learn/). Recurso canónico sobre embeddings, chunking y arquitecturas RAG.
+- **Promptfoo y RAGAS** — documentación oficial de las herramientas de evaluación que se usan en el curso.
+
+El temario aquí presentado refleja el consenso de la industria sobre qué necesita saber un AI Engineer hoy, organizado con el énfasis particular de este curso: **TypeScript-first, multi-provider, conceptos sobre frameworks y proyecto integrador real desde el día 1**.
 
 ---
 
