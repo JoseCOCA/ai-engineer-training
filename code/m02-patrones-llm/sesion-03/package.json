@@ -1,0 +1,27 @@
+{
+  "name": "@curso-ai/m02-sesion-03",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S03 — Wrappers, retry, fallback, instrumentación.",
+  "scripts": {
+    "chat": "tsx --env-file=../../../.env src/chat-demo.ts",
+    "retry-demo": "tsx --env-file=../../../.env src/retry-demo.ts",
+    "fallback-demo": "tsx --env-file=../../../.env src/fallback-demo.ts",
+    "streaming-demo": "tsx --env-file=../../../.env src/streaming-demo.ts",
+    "flow-demo": "tsx --env-file=../../../.env src/flow-demo.ts",
+    "aggregate": "tsx src/aggregate.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "ollama-ai-provider-v2": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
