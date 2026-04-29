@@ -149,7 +149,7 @@ Cuando construyes un producto con LLMs, mentalmente lo divides en **6 capas**. C
 
 **Capa 6 — Producción.** Latencia (¿el usuario espera 30 segundos por una respuesta?), costo (¿cuánto cuesta atender 10.000 usuarios?), observabilidad (¿qué hizo el sistema cuando falló?), seguridad (¿pueden inyectar prompts maliciosos?), escalabilidad (¿qué hace si Anthropic se cae?). Esto es **Módulo 6**.
 
-> **Patrón recurrente del curso:** cada módulo profundiza en una o dos capas. Si en algún momento te perdés, vuelve a este diagrama y pregúntate: *"¿en qué capa estoy ahora?"*.
+> **Patrón recurrente del curso:** cada módulo profundiza en una o dos capas. Si en algún momento te pierdes, vuelve a este diagrama y pregúntate: *"¿en qué capa estoy ahora?"*.
 
 ### 4.4. Economía de los LLMs
 
@@ -340,7 +340,7 @@ Si no puedes responderlas sin volver a leer, no aprendiste el concepto.
 2. Nombra las 6 capas del stack mental y da un ejemplo de decisión que toma un AI Engineer en cada una.
 3. ¿Por qué el output de un LLM es más caro que el input? Si tuvieras que adivinar, ¿qué razón técnica está detrás?
 4. ¿En qué casos NO tiene sentido self-hostear modelos open-source con Ollama, aun teniendo el hardware?
-5. ¿Cuáles son los 4 argumentos para tener una abstracción multi-provider desde el día 1? Si tu CTO te dice *"dejá de over-engineer y usá Anthropic directamente"*, ¿con cuál de los 4 argumentos lo defenderías?
+5. ¿Cuáles son los 4 argumentos para tener una abstracción multi-provider desde el día 1? Si tu CTO te dice *"deja de over-engineer y usa Anthropic directamente"*, ¿con cuál de los 4 argumentos lo defenderías?
 
 ---
 

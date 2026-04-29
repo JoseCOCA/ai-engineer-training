@@ -56,7 +56,7 @@ Las **3 piezas**:
 
 ### 4.2. Por qué importar de `ai` y no del SDK del proveedor
 
-Hay dos formas de hacer una llamada a Anthropic con TypeScript. Acá está la diferencia, y por qué este curso elige una sobre la otra:
+Hay dos formas de hacer una llamada a Anthropic con TypeScript. Aquí está la diferencia, y por qué este curso elige una sobre la otra:
 
 #### Forma A — directo al SDK del proveedor (ANTIPATRÓN para este curso)
 
@@ -109,8 +109,8 @@ result.warnings      // problemas no fatales detectados por el SDK
 - **`usage.inputTokens`** — cuántos tokens contó el proveedor en TU prompt (system + user + history). Te permite estimar costo. **Suele ser distinto a tu cuenta local con tiktoken porque cada proveedor tokeniza diferente.**
 - **`usage.outputTokens`** — cuántos tokens generó el modelo. Es el factor caro (3-5× input, ver S00.1).
 - **`finishReason`** — por qué se detuvo el modelo:
-  - `"stop"` — terminó de forma natural (el modelo decidió que ya respondió). **Lo que querés en la mayoría de casos.**
-  - `"length"` — chocó con `maxOutputTokens`. **Ojo:** la respuesta está truncada a la mitad. Necesitás subir el límite o cambiar el prompt.
+  - `"stop"` — terminó de forma natural (el modelo decidió que ya respondió). **Lo que quieres en la mayoría de casos.**
+  - `"length"` — chocó con `maxOutputTokens`. **Ojo:** la respuesta está truncada a la mitad. Necesitas subir el límite o cambiar el prompt.
   - `"tool-calls"` — el modelo decidió invocar un tool en lugar de responder texto. Lo cubrimos en M5.
   - `"content-filter"` — el proveedor bloqueó la respuesta por políticas. Más común con OpenAI y Anthropic.
 - **`warnings`** — el SDK detectó algo raro pero no bloqueante. Vale la pena loguearlo en producción.
@@ -124,7 +124,7 @@ Ambas funciones hacen lo mismo conceptualmente: llamar al modelo y devolver la r
 | | `generateText` | `streamText` |
 |---|---|---|
 | **Cómo entrega tokens** | Espera a tener TODA la respuesta y la devuelve de una | Devuelve un stream que emite cada token a medida que sale |
-| **Latencia percibida por el usuario** | Igual a la latencia real (esperás 5s por una respuesta de 5s) | Mucho menor (ves el primer token en ~200ms) |
+| **Latencia percibida por el usuario** | Igual a la latencia real (esperas 5s por una respuesta de 5s) | Mucho menor (ves el primer token en ~200ms) |
 | **Complejidad de uso** | Simple (await + response) | Requiere consumir un stream + manejar lifecycle |
 | **Cuándo usarlo** | Scripts, batch jobs, llamadas internas no visibles al usuario | UX conversacional, cualquier lugar donde el usuario ESPERA |
 
@@ -142,7 +142,7 @@ Ambas funciones hacen lo mismo conceptualmente: llamar al modelo y devolver la r
 ### Antipatrones
 
 - **Importar `@anthropic-ai/sdk` (o cualquier SDK de proveedor) en cualquier sitio fuera de `lib/llm.ts`.** Acopla la app al proveedor.
-- **Ignorar `finishReason`.** Si la respuesta es `length`, está truncada y vos no lo sabés.
+- **Ignorar `finishReason`.** Si la respuesta es `length`, está truncada y vos no lo sabes.
 - **No loguear tokens.** Tu factura te va a sorprender.
 - **Hardcodear el modelo en la llamada.** El modelo se elige en `lib/llm.ts`, no en cada call site.
 
@@ -168,9 +168,9 @@ Tres ideas para llevarte:
 ## 8. Preguntas de auto-evaluación
 
 1. ¿Por qué la app importa `llm` desde `./lib/llm.js` en vez de importar `anthropic` del SDK directamente? Da DOS razones distintas a las del README.
-2. Si tu llamada devuelve `finishReason: "length"`, ¿qué pasó y qué podés hacer al respecto?
+2. Si tu llamada devuelve `finishReason: "length"`, ¿qué pasó y qué puedes hacer al respecto?
 3. ¿Cuándo usarías `generateText` y cuándo `streamText` en TiendaPro? Da un ejemplo de cada uno.
-4. Tenés un compañero que copia tu código y agrega una línea `import OpenAI from "openai"` en `src/index.ts`. ¿Por qué es un problema y cómo se lo explicarías sin sonar dogmático?
+4. Tienes un compañero que copia tu código y agrega una línea `import OpenAI from "openai"` en `src/index.ts`. ¿Por qué es un problema y cómo se lo explicarías sin sonar dogmático?
 5. La cuenta de tokens del SDK (`usage.inputTokens`) y la cuenta local con `tiktoken` te dan números distintos para el mismo prompt. ¿Por qué?
 
 ---

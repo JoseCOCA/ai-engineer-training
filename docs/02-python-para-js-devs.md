@@ -450,7 +450,7 @@ a == b    # True
 a is b    # False — son objetos distintos
 
 x = None
-x is None    # ✅ siempre usá `is None`, NO `== None`
+x is None    # ✅ siempre usa `is None`, NO `== None`
 ```
 
 ### 3. Argumentos default mutables — TRAMPA

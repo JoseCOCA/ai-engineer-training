@@ -12,11 +12,11 @@ Material opcional para profundizar. **No es necesario consumir todo** — es una
 ## Para ampliar el panorama del rol
 
 - **Chip Huyen — _AI Engineering: Building Applications with Foundation Models_** (O'Reilly, 2024). El libro de referencia para el rol completo. El capítulo 1 cubre todo lo que vimos en esta sesión a más profundidad. Recomendado leer entero a lo largo del curso.
-- **DeepLearning.AI — _AI Python for Beginners_** (curso corto gratuito). Si necesitás onboarding adicional en Python aplicado a IA. Complementa nuestro [`docs/02-python-para-js-devs.md`](../../../02-python-para-js-devs.md).
+- **DeepLearning.AI — _AI Python for Beginners_** (curso corto gratuito). Si necesitas onboarding adicional en Python aplicado a IA. Complementa nuestro [`docs/02-python-para-js-devs.md`](../../../02-python-para-js-devs.md).
   - https://www.deeplearning.ai/short-courses/ai-python-for-beginners/
-- **Andrew Ng — _AI for Everyone_** (Coursera, gratis para auditar). Versión más amplia y no técnica del panorama IA. Útil si querés tener un marco para explicarle a alguien no técnico a qué te dedicás.
+- **Andrew Ng — _AI for Everyone_** (Coursera, gratis para auditar). Versión más amplia y no técnica del panorama IA. Útil si quieres tener un marco para explicarle a alguien no técnico a qué te dedicás.
 
-## Datos vivos (consultá cuando necesités datos actualizados)
+## Datos vivos (consultá cuando necesites datos actualizados)
 
 - **Artificial Analysis** — comparativas vivas de precios, latencia y calidad de modelos. Es la referencia más actualizada que existe.
   - https://artificialanalysis.ai

@@ -18,7 +18,7 @@
  *   pnpm install
  *   pnpm compare
  *
- * Si querés cambiar el prompt, editá la constante PROMPT abajo.
+ * Si quieres cambiar el prompt, edita la constante PROMPT abajo.
  */
 import { generateText, type LanguageModel } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
@@ -27,7 +27,7 @@ import { openai } from "@ai-sdk/openai";
 import { createOllama } from "ollama-ai-provider-v2";
 
 // ---------------------------------------------------------------------------
-// Lo que vas a comparar — modificá libremente.
+// Lo que vas a comparar — modifica libremente.
 // ---------------------------------------------------------------------------
 
 const SYSTEM_PROMPT =
@@ -39,7 +39,7 @@ const PROMPT =
 
 // ---------------------------------------------------------------------------
 // Configuración de proveedores.
-// Precios snapshot abril 2026 — verificá en https://artificialanalysis.ai
+// Precios snapshot abril 2026 — verifica en https://artificialanalysis.ai
 // ---------------------------------------------------------------------------
 
 interface ProviderConfig {
@@ -172,7 +172,7 @@ async function main(): Promise<void> {
   if (available.length === 0) {
     console.log();
     console.error(
-      "Configurá al menos un proveedor LLM en tu .env (ver env.example en la raíz del repo).",
+      "Configura al menos un proveedor LLM en tu .env (ver env.example en la raíz del repo).",
     );
     process.exit(1);
   }
@@ -239,7 +239,7 @@ async function main(): Promise<void> {
 
   console.log();
   console.log(
-    "Nota: precios snapshot abril 2026. Verificá vivos en artificialanalysis.ai",
+    "Nota: precios snapshot abril 2026. Verifica vivos en artificialanalysis.ai",
   );
 }
 

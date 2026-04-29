@@ -9,7 +9,7 @@
 A diferencia de S00.1 y S00.2, **esta sesión NO es lectura + ejercicios**. Es un **lab práctico** apoyado en un documento de referencia ya existente. El objetivo es que escribas, ejecutes y traduzcas código Python con paralelos a TS, **haciendo**, no leyendo.
 
 > **Documento de referencia (única "teoría" de esta sesión):**
-> [`docs/02-python-para-js-devs.md`](../../../02-python-para-js-devs.md) — onboarding completo de Python para devs JS/TS, con paralelos lado a lado, cheatsheet y mini-ejemplo. Léelo en diagonal antes de hacer los ejercicios; vas a volver a él como referencia mientras los hacés.
+> [`docs/02-python-para-js-devs.md`](../../../02-python-para-js-devs.md) — onboarding completo de Python para devs JS/TS, con paralelos lado a lado, cheatsheet y mini-ejemplo. Léelo en diagonal antes de hacer los ejercicios; vas a volver a él como referencia mientras los haces.
 
 ## 1. Objetivos de aprendizaje
 
@@ -23,7 +23,7 @@ Al terminar esta sesión vas a poder:
 
 ## 2. Prerequisitos
 
-- Haber leído (al menos en diagonal) [`docs/02-python-para-js-devs.md`](../../../02-python-para-js-devs.md). El lab presupone que tenés contexto sobre la sintaxis y el tooling.
+- Haber leído (al menos en diagonal) [`docs/02-python-para-js-devs.md`](../../../02-python-para-js-devs.md). El lab presupone que tienes contexto sobre la sintaxis y el tooling.
 - Tener Python 3.10+ disponible (lo verifica el ejercicio 1).
 - 1 GB de espacio libre en disco (uno de los ejercicios descarga un modelo ~80 MB).
 
@@ -31,13 +31,13 @@ Al terminar esta sesión vas a poder:
 
 Te propongo este orden, que es el de [`ejercicios.md`](ejercicios.md):
 
-1. **Setup (10 min)** — instalar `uv` si no lo tenés, crear tu primer proyecto Python.
+1. **Setup (10 min)** — instalar `uv` si no lo tienes, crear tu primer proyecto Python.
 2. **Hello world side-by-side (10 min)** — escribir el mismo programa en TS y en Python para sentirlo en los dedos.
 3. **Translation challenges (15 min)** — 3 funciones TS para traducir a Python.
 4. **Embedding real (15 min)** — instalar `sentence-transformers`, generar tu primer embedding, calcular similaridad semántica entre frases. **Este es el mejor ejercicio de la sesión.**
 5. **Aporte a TiendaPro:** sin código por ahora.
 
-Si te quedás sin tiempo, **el orden importa**: ejercicios 1-3 son los que más rendimiento te dan. El 4 es premio si llegás.
+Si te quedas sin tiempo, **el orden importa**: ejercicios 1-3 son los que más rendimiento te dan. El 4 es premio si llegas.
 
 ## 4. Conexión con TiendaPro
 
@@ -51,7 +51,7 @@ Todo el resto del curso (la app, el agente, la API, la UI) sigue en TypeScript.
 
 ## 5. Cheatsheet de bolsillo
 
-Para los reflejos rápidos mientras hacés los ejercicios. Si te encontrás googleando algo más allá de esto, conviene volver al [`doc 02`](../../../02-python-para-js-devs.md).
+Para los reflejos rápidos mientras haces los ejercicios. Si te encuentras googleando algo más allí de esto, conviene volver al [`doc 02`](../../../02-python-para-js-devs.md).
 
 | TS | Python |
 |----|--------|

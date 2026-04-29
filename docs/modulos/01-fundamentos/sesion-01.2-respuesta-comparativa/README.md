@@ -8,7 +8,7 @@
 
 Al terminar esta sesión vas a poder:
 
-- Leer y aprovechar la **estructura completa de la respuesta** del LLM (más allá de `text` y `usage`): `finishReason`, `warnings`, `providerMetadata`, `request`, `response`.
+- Leer y aprovechar la **estructura completa de la respuesta** del LLM (más allí de `text` y `usage`): `finishReason`, `warnings`, `providerMetadata`, `request`, `response`.
 - Hacer una **comparativa "fair" entre proveedores** controlando las variables que importan (mismo prompt, mismo system, mismo idioma, mismo timestamp).
 - Calcular el **costo real** de una llamada a partir de los tokens reportados, y proyectarlo a volumen mensual.
 - Explicar **por qué dos proveedores responden diferente** al mismo prompt: tokenización, RLHF, defaults internos.
@@ -56,7 +56,7 @@ const { inputTokens, outputTokens } = result.usage;
 console.log(`Input: ${inputTokens}, Output: ${outputTokens}`);
 ```
 
-> **Ojo:** `inputTokens` puede diferir de tu cuenta local con `tiktoken` porque cada proveedor tokeniza distinto. Para presupuestar exacto, **usá el número que devuelve el proveedor**.
+> **Ojo:** `inputTokens` puede diferir de tu cuenta local con `tiktoken` porque cada proveedor tokeniza distinto. Para presupuestar exacto, **usa el número que devuelve el proveedor**.
 
 **`finishReason`** — por qué se detuvo el modelo. Los valores comunes:
 
@@ -104,17 +104,17 @@ Cada proveedor entrena el comportamiento "deseable" según sus criterios:
 Estas diferencias **NO son aleatorias** — son decisiones de diseño documentadas. Vas a notar el "estilo Claude" vs "estilo GPT" vs "estilo Gemini" muy rápido.
 
 **3. Defaults internos distintos.**
-Cada proveedor aplica defaults que no especificás:
+Cada proveedor aplica defaults que no especificas:
 - `temperature` por defecto: típicamente entre 0.7 y 1.0, pero varía.
 - `top_p` por defecto: idem.
 - `max_tokens` por defecto: algunos proveedores tienen un límite implícito (a veces sorprendentemente bajo).
 - Reasoning interno: Gemini 2.5+ y o3+ de OpenAI pueden hacer "thinking" antes de generar (consume tokens y latencia).
 
-> **Implicación práctica:** si no seteás explícitamente `temperature` y `maxOutputTokens`, estás dejando que el proveedor decida por vos. **No lo hagas** en producción.
+> **Implicación práctica:** si no seteas explícitamente `temperature` y `maxOutputTokens`, estás dejando que el proveedor decida por vos. **No lo hagas** en producción.
 
 ### 4.3. Cómo hacer una comparativa fair
 
-Si querés comparar dos proveedores en serio (no anecdóticamente), necesitás **controlar las variables** que afectan el resultado:
+Si quieres comparar dos proveedores en serio (no anecdóticamente), necesitas **controlar las variables** que afectan el resultado:
 
 | Variable | Cómo controlarla |
 |----------|------------------|
@@ -152,7 +152,7 @@ El script `compare.ts` lo hace por vos con un snapshot de precios de abril 2026 
 
 #### Proyección a volumen — el reality check
 
-Una llamada cuesta $0.001. Suena gratis. Multiplicá:
+Una llamada cuesta $0.001. Suena gratis. Multiplica:
 
 - 10.000 mensajes/día × $0.001 = **$10/día = $300/mes**
 - 100.000 mensajes/día × $0.001 = **$100/día = $3.000/mes**
@@ -164,7 +164,7 @@ Una llamada cuesta $0.001. Suena gratis. Multiplicá:
 
 No hay un "mejor proveedor". Hay un mejor proveedor **para tu caso concreto**. Heurística que funciona:
 
-| Criterio principal | Elegí |
+| Criterio principal | Elige |
 |--------------------|-------|
 | **Costo más bajo posible**, calidad básica suficiente | Gemini Flash, GPT-5 nano, Claude Haiku 4.5 |
 | **Mejor calidad, costo no es el constraint** | Claude Opus 4, GPT-5, Gemini Ultra |
@@ -190,7 +190,7 @@ No hay un "mejor proveedor". Hay un mejor proveedor **para tu caso concreto**. H
 
 - **"Anthropic es mejor que OpenAI"** — afirmación sin contexto. Mejor para qué tarea, qué prompt, qué idioma, qué presupuesto.
 - **Comparar precios sin considerar tokenización.** Un proveedor "más barato por token" puede ser más caro porque tokeniza peor.
-- **Decidir proveedor por una sola corrida.** La varianza es alta — necesitás múltiples muestras o `temperature = 0`.
+- **Decidir proveedor por una sola corrida.** La varianza es alta — necesitas múltiples muestras o `temperature = 0`.
 - **No medir `tokens/segundo`.** A veces la métrica que importa para UX es throughput, no latencia total.
 
 ## 6. Conexión con TiendaPro
@@ -209,22 +209,22 @@ A partir de **M2 (Patrones de aplicaciones LLM)** vamos a:
 - Introducir guardrails serios.
 - Empezar a usar `streamText` para UX conversacional.
 
-El **tag `proyecto-m1`** marca este punto como referencia para volver, comparar progreso, o reiniciar desde acá si te perdés más adelante.
+El **tag `proyecto-m1`** marca este punto como referencia para volver, comparar progreso, o reiniciar desde aquí si te pierdes más adelante.
 
 ## 7. Resumen
 
 Tres ideas para llevarte:
 
 1. **La respuesta del LLM es un objeto rico, no un string.** `usage`, `finishReason`, `warnings` y `providerMetadata` son tu instrumental de vuelo en producción.
-2. **Los proveedores difieren por diseño** (tokenización, RLHF, defaults). No son intercambiables a ciegas — la abstracción te permite el switch, pero tenés que **medir** antes de decidir.
+2. **Los proveedores difieren por diseño** (tokenización, RLHF, defaults). No son intercambiables a ciegas — la abstracción te permite el switch, pero tienes que **medir** antes de decidir.
 3. **El costo se vive en volumen, no en llamadas individuales.** $0.001 × 100.000/día = $3.000/mes. La economía del LLM es la primera dimensión de diseño, no la última.
 
 ## 8. Preguntas de auto-evaluación
 
-1. Acabás de recibir `result.warnings: [{ message: "Provider does not support 'topK' for this model" }]`. ¿Qué pasó y qué hacés?
+1. Acabas de recibir `result.warnings: [{ message: "Provider does not support 'topK' for this model" }]`. ¿Qué pasó y qué haces?
 2. Tu app reporta `result.finishReason: "length"` el 30% de las llamadas. ¿Cuáles son las 3 acciones más razonables a investigar, en orden?
-3. La cuenta de tokens del provider y la de tu `tiktoken` local difieren. ¿Cuál usás para presupuestar? ¿Por qué?
-4. Tenés que elegir entre Gemini Flash y Claude Haiku para un asistente de FAQs de TiendaPro con ~50K consultas/día. ¿Qué información NECESITAS antes de decidir? Listá 4 cosas.
+3. La cuenta de tokens del provider y la de tu `tiktoken` local difieren. ¿Cuál usas para presupuestar? ¿Por qué?
+4. Tienes que elegir entre Gemini Flash y Claude Haiku para un asistente de FAQs de TiendaPro con ~50K consultas/día. ¿Qué información NECESITAS antes de decidir? Lista 4 cosas.
 5. ¿Por qué la comparativa de `compare.ts` (1 corrida) NO sería válida como benchmark para una decisión de producción? ¿Qué le agregarías para que lo sea?
 
 ---

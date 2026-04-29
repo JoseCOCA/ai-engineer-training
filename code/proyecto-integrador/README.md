@@ -10,7 +10,7 @@ Cada cierre de módulo agrega una capa nueva (RAG en M3, agentes en M5, desplieg
 
 ## Setup
 
-Desde la raíz del repo, asegurate de tener `.env` configurado siguiendo `env.example`. El proyecto **reusa el `.env` de la raíz** — no necesita uno propio.
+Desde la raíz del repo, asegúrate de tener `.env` configurado siguiendo `env.example`. El proyecto **reusa el `.env` de la raíz** — no necesita uno propio.
 
 ```bash
 cd code/proyecto-integrador
@@ -20,9 +20,9 @@ pnpm dev
 
 ## Cambiar de proveedor LLM
 
-Editá `DEFAULT_LLM_PROVIDER` en `.env` (raíz del repo). Valores válidos: `ollama` | `google` | `anthropic` | `openai`.
+Edita `DEFAULT_LLM_PROVIDER` en `.env` (raíz del repo). Valores válidos: `ollama` | `google` | `anthropic` | `openai`.
 
-**No necesitás tocar el código del proyecto** — la abstracción en `src/lib/llm.ts` se encarga.
+**No necesitas tocar el código del proyecto** — la abstracción en `src/lib/llm.ts` se encarga.
 
 ## Estructura
 
@@ -60,6 +60,6 @@ Tras la comparativa de [S01.2](../../docs/modulos/01-fundamentos/sesion-01.2-res
 - **Latencia razonable** para MVP (~13s en respuestas de ~300 tokens, según comparativa de S01.2).
 - **Costo proyectado** a 10K mensajes/día ≈ **$104/mes** (vs ~$385/mes con Claude Haiku 4.5).
 
-Esta es **una recomendación, no una imposición**. Si preferís trabajar offline o con otro proveedor, cambiá `DEFAULT_LLM_PROVIDER` en `.env` a `ollama`, `anthropic` u `openai` según necesidad. La abstracción multi-provider absorbe el cambio.
+Esta es **una recomendación, no una imposición**. Si prefieres trabajar offline o con otro proveedor, cambia `DEFAULT_LLM_PROVIDER` en `.env` a `ollama`, `anthropic` u `openai` según necesidad. La abstracción multi-provider absorbe el cambio.
 
 A revisar en **Módulo 4** cuando podamos comparar proveedores con métricas de calidad rigurosas (RAGAS, Promptfoo).

@@ -30,7 +30,7 @@ Razón de fin: stop
 
 ### Preguntas de observación
 
-Antes de seguir, respondé mentalmente:
+Antes de seguir, responde mentalmente:
 
 1. ¿De dónde sale `[provider: ollama]`? ¿Por qué dice `ollama` y no otra cosa?
 2. ¿Por qué `output` (~25) es mucho menor que `input` (~94)?
@@ -56,7 +56,7 @@ import { openai } from "@ai-sdk/openai";
 import { createOllama } from "ollama-ai-provider-v2";
 ```
 
-Esto es **deliberado**. Si necesitás los 4 SDKs, la abstracción es el lugar donde viven.
+Esto es **deliberado**. Si necesitas los 4 SDKs, la abstracción es el lugar donde viven.
 
 **(b) Decide cuál usar según `process.env.DEFAULT_LLM_PROVIDER`.**
 
@@ -80,7 +80,7 @@ Abrilo. Más corto aún. Tres bloques:
 
 **(a) Importa la abstracción.** Ningún SDK de proveedor. Solo `ai` y `./lib/llm.js`.
 
-**(b) Define el SYSTEM_PROMPT.** Acá vive la **personalidad del asistente** y los **guardrails** ("no inventes", "no menciones competencia").
+**(b) Define el SYSTEM_PROMPT.** Aquí vive la **personalidad del asistente** y los **guardrails** ("no inventes", "no menciones competencia").
 
 **(c) Llama `generateText` y reporta el resultado.**
 
@@ -94,7 +94,7 @@ Ahora viene la parte divertida. Vas a romper cosas a propósito y observar qué 
 
 ### Experimento 1: cambiar de proveedor sin tocar código
 
-Editá tu `.env` (raíz del repo):
+Edita tu `.env` (raíz del repo):
 
 ```bash
 # Antes
@@ -104,17 +104,17 @@ DEFAULT_LLM_PROVIDER=ollama
 DEFAULT_LLM_PROVIDER=google      # o anthropic, u openai
 ```
 
-Asegurate de tener configurada la API key del proveedor que elijas. Volvé a correr `pnpm dev`. Vas a ver:
+Asegúrate de tener configurada la API key del proveedor que elijas. Vuelve a correr `pnpm dev`. Vas a ver:
 
 - `[provider: google]` (o el que hayas elegido).
 - Latencia distinta (cloud suele ser MÁS rápido que Ollama local).
 - Posiblemente un estilo de respuesta distinto (Claude tiende a ser más amable, GPT más directo).
 
-**Confirmá:** no tocaste NI UNA línea de código en `src/`. Esto es lo que demuestra la abstracción.
+**Confirma:** no tocaste NI UNA línea de código en `src/`. Esto es lo que demuestra la abstracción.
 
 ### Experimento 2: cambiar el system prompt
 
-En `src/index.ts`, cambiá:
+En `src/index.ts`, cambia:
 
 ```typescript
 const SYSTEM_PROMPT = `Eres el asistente virtual oficial de TiendaPro, ...`;
@@ -126,11 +126,11 @@ por algo radicalmente distinto, por ejemplo:
 const SYSTEM_PROMPT = `Eres un pirata. Responde a TODO en jerga pirata, con "arrr" frecuentes.`;
 ```
 
-Volvé a correr. **Observá cómo cambia el tono y el estilo** sin cambiar ni `prompt` ni `model`. Esto es lo que vamos a profundizar en M2 (patrones de prompts).
+Vuelve a correr. **Observa cómo cambia el tono y el estilo** sin cambiar ni `prompt` ni `model`. Esto es lo que vamos a profundizar en M2 (patrones de prompts).
 
 ### Experimento 3: provocar `finishReason: "length"`
 
-Agregá `maxOutputTokens: 5` a la llamada:
+Agrega `maxOutputTokens: 5` a la llamada:
 
 ```typescript
 const result = await generateText({
@@ -141,13 +141,13 @@ const result = await generateText({
 });
 ```
 
-Volvé a correr. La respuesta va a estar **truncada** y vas a ver `Razón de fin: length`.
+Vuelve a correr. La respuesta va a estar **truncada** y vas a ver `Razón de fin: length`.
 
-**Esto es exactamente lo que pasa en producción** cuando subestimás el output. Por eso loguear `finishReason` es no-negociable.
+**Esto es exactamente lo que pasa en producción** cuando subestimas el output. Por eso loguear `finishReason` es no-negociable.
 
 ### Experimento 4: intentar romper la abstracción (NO lo commitees)
 
-Creá un archivo `src/bad-example.ts`:
+Crea un archivo `src/bad-example.ts`:
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -156,19 +156,19 @@ const client = new Anthropic();
 // ... uso directo del SDK de Anthropic
 ```
 
-**Observá lo que perdés:**
+**Observa lo que pierdes:**
 
-- Acoplamiento al proveedor: si querés probar Gemini en este caso, tenés que reescribir.
+- Acoplamiento al proveedor: si quieres probar Gemini en este caso, tienes que reescribir.
 - Inconsistencia: la app ahora tiene 2 formas de llamar al LLM (vía abstracción y directa).
 - Costo a futuro: cualquier cambio en defaults (modelo, retries, logging) hay que hacerlo en 2 lugares.
 
-**Borrá el archivo cuando termines.** El objetivo era ver el costo de hacerlo mal.
+**Borra el archivo cuando termines.** El objetivo era ver el costo de hacerlo mal.
 
 ---
 
 ## 4. Reto (~5 min, opcional): logger de llamadas
 
-Modificá `src/index.ts` para que TODA llamada al LLM se loguee como una sola línea estructurada (estilo log de producción), por ejemplo:
+Modifica `src/index.ts` para que TODA llamada al LLM se loguee como una sola línea estructurada (estilo log de producción), por ejemplo:
 
 ```
 [2026-04-29T18:32:14Z] provider=ollama model=qwen2.5:7b input=94 output=25 finish=stop ms=14850
@@ -177,7 +177,7 @@ Modificá `src/index.ts` para que TODA llamada al LLM se loguee como una sola l�
 **Pistas:**
 
 - `new Date().toISOString()` te da el timestamp.
-- El nombre del modelo no está expuesto directamente en el `LanguageModel` por diseño (la app no debería depender de saberlo). Para este reto podés exportar `modelInUse` desde `lib/llm.ts` siguiendo el patrón de `providerInUse`.
+- El nombre del modelo no está expuesto directamente en el `LanguageModel` por diseño (la app no debería depender de saberlo). Para este reto puedes exportar `modelInUse` desde `lib/llm.ts` siguiendo el patrón de `providerInUse`.
 
 > Esto NO es un loguer de producción todavía — para eso vamos a usar Langfuse en M6 — pero es un buen hábito desde el día 1.
 
@@ -191,7 +191,7 @@ Esta sesión **YA es** el aporte al proyecto integrador. El primer commit de Tie
 
 El **tag `proyecto-m1`** se va a poner al cierre de S01.2, cuando hayamos terminado el Módulo 1.
 
-Lo que tenés ahora en `code/proyecto-integrador/`:
+Lo que tienes ahora en `code/proyecto-integrador/`:
 
 - ✅ Estructura de proyecto Node.js + TS limpia
 - ✅ Abstracción multi-provider funcionando

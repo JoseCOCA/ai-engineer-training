@@ -1,6 +1,6 @@
 # Sesión 01.1 — Recursos complementarios
 
-Material de referencia para profundizar en el Vercel AI SDK y los proveedores que usás en el proyecto.
+Material de referencia para profundizar en el Vercel AI SDK y los proveedores que usas en el proyecto.
 
 ---
 
@@ -10,7 +10,7 @@ Material de referencia para profundizar en el Vercel AI SDK y los proveedores qu
   - https://ai-sdk.dev/docs/introduction
 - **AI SDK Cookbook** — recetas listas para casos comunes (chat con memoria, RAG, tools, streaming a UI). Vas a volver a esto a lo largo del curso.
   - https://ai-sdk.dev/cookbook
-- **Repositorio de ejemplos** — proyectos completos (Next.js + Chat, agentes, RAG con pgvector). Útil cuando querés ver "código real" de cómo se hace algo.
+- **Repositorio de ejemplos** — proyectos completos (Next.js + Chat, agentes, RAG con pgvector). Útil cuando quieres ver "código real" de cómo se hace algo.
   - https://github.com/vercel/ai/tree/main/examples
 - **API Reference de `LanguageModel`** — el tipo polimórfico que está detrás de toda la abstracción.
   - https://ai-sdk.dev/docs/reference/ai-sdk-core/language-model
@@ -37,7 +37,7 @@ Material de referencia para profundizar en el Vercel AI SDK y los proveedores qu
 
 ## Sobre el patrón de abstracción de proveedores
 
-- **Vercel AI SDK — Provider Architecture** — cómo está diseñado internamente el SDK para soportar múltiples proveedores. Útil si querés entender QUÉ hace el polimorfismo.
+- **Vercel AI SDK — Provider Architecture** — cómo está diseñado internamente el SDK para soportar múltiples proveedores. Útil si quieres entender QUÉ hace el polimorfismo.
   - https://ai-sdk.dev/docs/foundations/providers-and-models
 - **Anthropic Engineering Blog — Building agents with the Anthropic SDK** — buen contraste para entender el costo de NO tener abstracción.
   - https://www.anthropic.com/engineering
@@ -51,7 +51,7 @@ Material de referencia para profundizar en el Vercel AI SDK y los proveedores qu
 - **Anthropic — Token Counting docs** — cada proveedor tokeniza distinto; Anthropic publica su tokenizer para que puedas estimar localmente.
   - https://docs.anthropic.com/en/docs/build-with-claude/token-counting
 
-## Lecturas más allá del SDK
+## Lecturas más allí del SDK
 
 - **Simon Willison — _LLM CLI tools_** — herramientas y ejemplos prácticos de cómo consumir LLMs desde scripts. Buen material para reforzar el "modo CLI".
   - https://simonwillison.net/tags/llm/

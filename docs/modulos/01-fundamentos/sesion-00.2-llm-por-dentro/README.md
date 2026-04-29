@@ -35,13 +35,13 @@ Al terminar esta sesión vas a poder:
 
 ### 4.1. Por qué te conviene saber esto (aunque no entrenes modelos)
 
-No necesitás saber cómo funciona el motor de un coche para conducir hasta el supermercado. Pero **sí lo necesitás si querés ganar una carrera, diagnosticar por qué pierde potencia en cuestas, o decidir qué modelo comprar para tu uso específico**.
+No necesitas saber cómo funciona el motor de un coche para conducir hasta el supermercado. Pero **sí lo necesitas si quieres ganar una carrera, diagnosticar por qué pierde potencia en cuestas, o decidir qué modelo comprar para tu uso específico**.
 
-Lo mismo aplica a los LLMs en producción. Podés construir un MVP sin entender nada de lo que sigue. Pero en el momento que tu producto:
+Lo mismo aplica a los LLMs en producción. Puedes construir un MVP sin entender nada de lo que sigue. Pero en el momento que tu producto:
 
-- Empiece a ser caro y necesités optimizarlo,
-- Empiece a alucinar y necesités acotarlo,
-- Necesite responder en menos de 2 segundos y veas que no llegás,
+- Empiece a ser caro y necesites optimizarlo,
+- Empiece a alucinar y necesites acotarlo,
+- Necesite responder en menos de 2 segundos y veas que no llegas,
 - Tenga que manejar conversaciones largas sin perder el hilo,
 
 vas a necesitar este capítulo. Lo que sigue es **el modelo mental mínimo** para tomar mejores decisiones. Sin matemáticas, sin código, sin papers.
@@ -74,7 +74,7 @@ Reglas aproximadas:
 1. **Costo.** Te cobran por token, no por palabra ni por carácter. Si tu prompt está en español, vas a usar más tokens que el equivalente en inglés. **Calcular costos en palabras te da estimaciones malas.**
 2. **Context window.** El límite del modelo está en tokens. Un libro de 80.000 palabras en español puede ser ~120K-160K tokens — más que el context window de muchos modelos.
 3. **Truncamiento.** Si tu prompt + output esperado superan el context window, el modelo va a truncar. A veces sin avisar.
-4. **Diseño de prompts.** Cada palabra del system prompt te cuesta. Empezá por lo importante.
+4. **Diseño de prompts.** Cada palabra del system prompt te cuesta. Empieza por lo importante.
 
 > **Herramienta práctica:** [OpenAI Tokenizer](https://platform.openai.com/tokenizer) te permite pegar un texto y ver exactamente cómo se tokeniza. Lo vas a usar en el ejercicio 1 de esta sesión.
 
@@ -129,9 +129,9 @@ Un Transformer tiene típicamente **decenas a cientos de bloques apilados** (GPT
 
 ### 4.5. Generación autoregresiva: token por token
 
-Acá está la parte más importante de toda la sesión. Léela dos veces.
+Aquí está la parte más importante de toda la sesión. Léela dos veces.
 
-Cuando le pasás un prompt al LLM, **el modelo no genera la respuesta entera de una vez**. Hace lo siguiente:
+Cuando le pasas un prompt al LLM, **el modelo no genera la respuesta entera de una vez**. Hace lo siguiente:
 
 ```
 1. Lee TODO tu input (prompt + contexto + historial).
@@ -151,15 +151,15 @@ Procesar el input se hace **en paralelo** (gracias al Transformer). Procesar el 
 
 **2. Por qué la latencia depende del output, no del input.**
 
-Si pedís una respuesta corta (50 tokens), el modelo responde rápido aunque tu input sea largo. Si pedís una respuesta larga (2000 tokens), va a tardar mucho aunque tu input sea corto. **El modelo no puede "pensar antes" — tiene que generar token por token.**
+Si pides una respuesta corta (50 tokens), el modelo responde rápido aunque tu input sea largo. Si pides una respuesta larga (2000 tokens), va a tardar mucho aunque tu input sea corto. **El modelo no puede "pensar antes" — tiene que generar token por token.**
 
 **3. Por qué existe el streaming.**
 
-Como el modelo genera token por token, **podés mostrarle al usuario cada token a medida que sale**, en lugar de esperar a tener la respuesta completa. Esto reduce drásticamente la **latencia percibida**: el usuario ve algo en 200ms aunque la respuesta completa tarde 5 segundos. Casi todos los productos LLM modernos usan streaming en la UI.
+Como el modelo genera token por token, **puedes mostrarle al usuario cada token a medida que sale**, en lugar de esperar a tener la respuesta completa. Esto reduce drásticamente la **latencia percibida**: el usuario ve algo en 200ms aunque la respuesta completa tarde 5 segundos. Casi todos los productos LLM modernos usan streaming en la UI.
 
 **4. Por qué `max_output_tokens` es un parámetro crítico.**
 
-Si no lo seteás, el modelo puede irse de mano y generar miles de tokens, costándote dinero y haciendo lenta la respuesta. **Siempre seteá un límite razonable** según el caso de uso.
+Si no lo seteas, el modelo puede irse de mano y generar miles de tokens, costándote dinero y haciendo lenta la respuesta. **Siempre configura un límite razonable** según el caso de uso.
 
 ### 4.6. Sampling: temperature, top-p, top-k
 
@@ -204,11 +204,11 @@ Antes de samplear, conserva solo los **k tokens más probables**.
 
 | Tipo de tarea | Temperature recomendada | Por qué |
 |---------------|------------------------|---------|
-| Clasificación, extracción de datos | **0** | Querés respuestas idénticas para inputs idénticos. Reproducibilidad. |
+| Clasificación, extracción de datos | **0** | Quieres respuestas idénticas para inputs idénticos. Reproducibilidad. |
 | Asistente factual (FAQs, soporte) | **0.2 – 0.4** | Algo de variación natural pero respuestas consistentes. |
 | Generación general (chatbot, documentación) | **0.5 – 0.7** | Default razonable. Variedad sin perder coherencia. |
-| Brainstorming creativo | **0.8 – 1.0** | Querés diversidad y "ideas raras". |
-| Escritura artística | **0.9 – 1.2** | Aceptás caos a cambio de originalidad. |
+| Brainstorming creativo | **0.8 – 1.0** | Quieres diversidad y "ideas raras". |
+| Escritura artística | **0.9 – 1.2** | Aceptas caos a cambio de originalidad. |
 
 > **Antipatrón muy común:** usar `temperature = 1` para clasificar. El modelo va a darte respuestas distintas para el mismo input y vas a volver loco a tu sistema downstream.
 
@@ -228,13 +228,13 @@ El **context window** es la cantidad máxima de tokens que el modelo puede manej
 
 #### Implicaciones prácticas
 
-1. **Tu prompt + output esperado tienen que caber.** Si pedís 2000 tokens de output con un prompt de 199K tokens en Haiku 4.5 (200K context), te quedás corto.
+1. **Tu prompt + output esperado tienen que caber.** Si pides 2000 tokens de output con un prompt de 199K tokens en Haiku 4.5 (200K context), te quedas corto.
 
-2. **Más context NO siempre es mejor.** Existe el efecto **"lost in the middle"**: los modelos prestan más atención al **principio y al final** del contexto, y olvidan lo del medio. Si tenés información crítica, ponela al principio o al final del prompt, no enterrada en el medio.
+2. **Más context NO siempre es mejor.** Existe el efecto **"lost in the middle"**: los modelos prestan más atención al **principio y al final** del contexto, y olvidan lo del medio. Si tienes información crítica, ponla al principio o al final del prompt, no enterrada en el medio.
 
 3. **El costo crece con el contexto.** Un prompt de 50K tokens es 50× más caro que uno de 1K. **El context grande es una herramienta cara**, úsala cuando aporta valor real.
 
-4. **El caching cambia la economía del context.** Si el bloque inicial del prompt es estable (system prompt, contexto de RAG fijo), podés activar caching del proveedor y pagar 10-25% del precio normal. Lo cubrimos en S04.
+4. **El caching cambia la economía del context.** Si el bloque inicial del prompt es estable (system prompt, contexto de RAG fijo), puedes activar caching del proveedor y pagar 10-25% del precio normal. Lo cubrimos en S04.
 
 ### 4.8. Por qué los LLMs alucinan
 
@@ -250,12 +250,12 @@ Eso es una **alucinación**: contenido plausible pero falso.
 
 #### Cómo se mitiga (preview de RAG y evaluación)
 
-1. **RAG (Módulo 4):** en lugar de confiar en el conocimiento del modelo, le inyectás información factual en el prompt y le pedís que responda **basándose solo en esa información**. La alucinación baja drásticamente.
+1. **RAG (Módulo 4):** en lugar de confiar en el conocimiento del modelo, le inyectás información factual en el prompt y le pides que responda **basándose solo en esa información**. La alucinación baja drásticamente.
 2. **Citas obligatorias:** pedirle al modelo que cite la fuente concreta de cada afirmación. Lo cubrimos en S11.2.
 3. **Evaluación automática (Módulo 4):** medir tasa de alucinación con eval sets y herramientas como RAGAS.
 4. **Guardrails:** validar la salida antes de mostrarla al usuario.
 
-> **La regla de oro:** si tu producto no puede tolerar información falsa, **no podés usar el LLM como fuente de verdad**. Tiene que haber una fuente confiable detrás (BBDD, API, documento), y el LLM solo orquesta y formula la respuesta.
+> **La regla de oro:** si tu producto no puede tolerar información falsa, **no puedes usar el LLM como fuente de verdad**. Tiene que haber una fuente confiable detrás (BBDD, API, documento), y el LLM solo orquesta y formula la respuesta.
 
 ### 4.9. Cómo se entrena un modelo (alto nivel)
 
@@ -273,23 +273,23 @@ Humanos comparan **dos respuestas del modelo** a la misma pregunta y eligen cuá
 #### Por qué te interesa esto
 
 - **Sesgos:** vienen del pre-training (refleja sesgos de internet) y del RLHF (refleja preferencias de los anotadores). Son inevitables, pero conocidos.
-- **Cut-off date:** todo lo que pasó después del corte de entrenamiento NO existe para el modelo. Por eso necesitás RAG si querés información actualizada.
+- **Cut-off date:** todo lo que pasó después del corte de entrenamiento NO existe para el modelo. Por eso necesitas RAG si quieres información actualizada.
 - **Diferencias entre proveedores:** Claude tiende a ser "más amable y cauto" que GPT en parte por diferencias en RLHF y en la *Constitutional AI* de Anthropic. Esto NO es opinión — es una decisión de diseño documentada.
-- **Fine-tuning open-source:** podés tomar un modelo open-source (Llama, Mistral) y hacerle SFT con tus propios datos. Los grandes ya hicieron el costoso pre-training; vos refinás encima.
+- **Fine-tuning open-source:** puedes tomar un modelo open-source (Llama, Mistral) y hacerle SFT con tus propios datos. Los grandes ya hicieron el costoso pre-training; vos refinás encima.
 
 ## 5. Patrones y antipatrones
 
 ### Patrones
 
 - **Pensar en tokens, no en palabras.** Cada decisión de prompt y de modelo se toma en tokens.
-- **`temperature = 0` para tareas deterministas.** Si necesitás reproducibilidad (clasificación, extracción), no negocies este parámetro.
+- **`temperature = 0` para tareas deterministas.** Si necesitas reproducibilidad (clasificación, extracción), no negocies este parámetro.
 - **Streaming en cualquier UX conversacional.** La generación es secuencial; ocultarlo al usuario es desperdiciar UX gratis.
 - **Información crítica al principio o al final del prompt.** Por el efecto "lost in the middle".
-- **Asumir que el modelo PUEDE alucinar y diseñar el sistema en consecuencia.** Si necesitás verdad, ponela en el contexto, no en el modelo.
+- **Asumir que el modelo PUEDE alucinar y diseñar el sistema en consecuencia.** Si necesitas verdad, ponla en el contexto, no en el modelo.
 
 ### Antipatrones
 
-- **Estimar costo en palabras.** Subestimás 30-50% en español.
+- **Estimar costo en palabras.** Subestimas 30-50% en español.
 - **`temperature = 1` para clasificación.** Vas a tener resultados distintos al mismo input.
 - **No setear `max_output_tokens`.** Te puede salir caro y lento sin querer.
 - **Pasar 100K tokens de contexto "por las dudas".** Caro, lento y *lost in the middle*.
@@ -303,7 +303,7 @@ Tres decisiones técnicas que ya podemos anticipar para TiendaPro a la luz de es
 
 2. **Temperature distinta por tipo de mensaje.**
    - *"¿Cuál es el estado de mi pedido X?"* → `temperature = 0`. Respuesta basada en datos, sin variación.
-   - *"Recomendame algo para una cena romántica"* → `temperature = 0.7`. Querés sugerencias variadas y "humanas".
+   - *"Recomendame algo para una cena romántica"* → `temperature = 0.7`. Quieres sugerencias variadas y "humanas".
    - El asistente va a tener que **identificar el tipo de mensaje** y elegir parámetros (preview de M5 — agentes con routing).
 
 3. **Catálogo en RAG, no en context window.** Aunque Sonnet 4.6 tenga 1M de context, meter el catálogo entero en cada prompt es:
@@ -319,15 +319,15 @@ Tres ideas para llevarte:
 
 1. **El LLM tokeniza, embebe, atiende y predice token por token.** Todo el resto (sampling, context window, alucinaciones, costo asimétrico) se deriva de este pipeline.
 2. **La generación es autoregresiva y secuencial.** Eso explica por qué el output cuesta más que el input, por qué la latencia depende del output, y por qué el streaming existe.
-3. **Las alucinaciones son un rasgo del diseño, no un bug.** Si tu producto necesita verdad, no la pongas en el modelo: ponela en el contexto vía RAG.
+3. **Las alucinaciones son un rasgo del diseño, no un bug.** Si tu producto necesita verdad, no la pongas en el modelo: ponla en el contexto vía RAG.
 
 ## 8. Preguntas de auto-evaluación
 
 1. ¿Por qué un texto en español usa más tokens que el equivalente en inglés? ¿Qué consecuencia práctica tiene esto para el costo de tu producto?
 2. Explica con tus propias palabras por qué el output de un LLM cuesta 3-5× más que el input.
-3. Tenés un caso de uso de extracción de datos estructurados (JSON) desde texto libre. ¿Qué `temperature` usás y por qué?
+3. Tienes un caso de uso de extracción de datos estructurados (JSON) desde texto libre. ¿Qué `temperature` usas y por qué?
 4. ¿Qué es el efecto *"lost in the middle"* y cómo afecta tus decisiones de diseño de prompt?
-5. ¿Por qué no podés "arreglar" las alucinaciones desde el prompt? ¿Cuáles son las dos estrategias correctas para mitigarlas?
+5. ¿Por qué no puedes "arreglar" las alucinaciones desde el prompt? ¿Cuáles son las dos estrategias correctas para mitigarlas?
 
 ---
 

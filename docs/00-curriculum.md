@@ -35,7 +35,7 @@ El curso se construye sobre tres principios que vas a ver repetidos hasta el can
 **No asume:**
 - Python (hay un onboarding rápido en `02-python-para-js-devs.md`).
 - Conocimiento previo de ML, deep learning ni de LLMs.
-- Matemáticas más allá del nivel de bachillerato.
+- Matemáticas más allí del nivel de bachillerato.
 
 ## 3. Estrategia de lenguaje: TypeScript-first híbrido
 
@@ -235,7 +235,7 @@ El curso es **autodidacta** pero está diseñado para evaluarte de forma honesta
 1. **Preguntas de auto-evaluación** al final de cada README. Si no puedes responderlas sin volver a leer, no aprendiste el concepto.
 2. **Ejercicios prácticos** — código que tiene que correr y producir el output esperado.
 3. **Hito del proyecto integrador** al final de cada módulo. Es el indicador más fuerte de progreso real.
-4. **Retos opcionales** para empujarte más allá.
+4. **Retos opcionales** para empujarte más allí.
 
 **No hay exámenes.** El proyecto integrador en producción al final del curso es el examen.
 

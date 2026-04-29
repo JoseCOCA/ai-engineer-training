@@ -23,18 +23,18 @@
 | 5. Evaluación | | | |
 | 6. Producción | | | |
 
-Tomate 10 minutos. **No mires la guía** hasta haber intentado las 6 capas, aunque sea con respuestas tentativas.
+Tómate 10 minutos. **No mires la guía** hasta haber intentado las 6 capas, aunque sea con respuestas tentativas.
 
 ---
 
 ### Guía de razonamiento (para contrastar tus respuestas)
 
-> **Importante:** no hay una única respuesta correcta. Lo que importa es que tu justificación sea **coherente** con los tradeoffs vistos en la teoría. Si tu respuesta difiere de la guía pero la podés defender, es válida.
+> **Importante:** no hay una única respuesta correcta. Lo que importa es que tu justificación sea **coherente** con los tradeoffs vistos en la teoría. Si tu respuesta difiere de la guía pero la puedes defender, es válida.
 
 | Capa | Razonamiento sugerido |
 |------|----------------------|
 | **1. Modelo** | MVP: Gemini Flash (free tier para validar) o Claude Haiku 4.5. Producción: Haiku para FAQs y agendamiento; Sonnet para conversaciones complejas o derivaciones de urgencia (donde un error es caro). |
-| **2. Prompt** | Sistema con tono empático y profesional, restricciones explícitas (*"NO des consejo médico, deriva a humano si detectás urgencia"*), formato de salida estructurado (JSON con `intent`: `agendar` / `consultar` / `urgencia`, y `response`). |
+| **2. Prompt** | Sistema con tono empático y profesional, restricciones explícitas (*"NO des consejo médico, deriva a humano si detectas urgencia"*), formato de salida estructurado (JSON con `intent`: `agendar` / `consultar` / `urgencia`, y `response`). |
 | **3. Contexto** | RAG con FAQs y políticas de la clínica. Memoria conversacional (últimos N mensajes). Acceso a calendario del médico para responder disponibilidad. |
 | **4. Orquestación** | Clasificador de intención → router. Si `intent=agendar`, llamar tool `bookAppointment(date, doctor)`. Si `urgencia`, escalar a humano inmediatamente. Si `consultar`, RAG sobre FAQs. |
 | **5. Evaluación** | Eval set inicial con 30-50 conversaciones representativas. En producción: rating explícito de pacientes + LLM-as-judge para calidad de respuestas. Métricas: % de derivaciones correctas, tiempo a resolución. |
@@ -85,9 +85,9 @@ $0 marginal (ya pagaste el hardware). Costo eléctrico despreciable a este volum
 
 ### 2.2. Reflexión personal (escribir, sin formato)
 
-Tomate 5-10 minutos de papel y boli (o un doc local). **No copies, escribí**.
+Tómate 5-10 minutos de papel y boli (o un doc local). **No copies, escribe**.
 
-- ¿En qué punto del spectrum *Prompt Engineer ↔ AI Engineer ↔ ML Engineer ↔ Researcher* querés posicionarte? ¿Por qué?
+- ¿En qué punto del spectrum *Prompt Engineer ↔ AI Engineer ↔ ML Engineer ↔ Researcher* quieres posicionarte? ¿Por qué?
 - ¿Qué te atrae de la práctica del AI Engineer y qué te genera resistencia? Sé honesto contigo mismo.
 - En tu rol actual o pasado, ¿qué problema concreto resolverías HOY si supieras lo que vas a aprender en este curso?
 
@@ -101,19 +101,19 @@ Elige 2 productos reales que uses (o conozcas) que tengan IA integrada — puede
 
 Para cada uno, intenta inferir:
 
-1. **¿Qué proveedor de LLM creés que usan?** Pistas observables:
+1. **¿Qué proveedor de LLM crees que usan?** Pistas observables:
    - **Latencia:** ¿es rápido (sub-segundo) o lento (>3s)? Latencia baja sugiere modelo económico o servido en hardware especializado (Groq, Cerebras).
    - **Formato de respuesta:** ¿streaming o respuesta completa? ¿Markdown? ¿Tools?
    - **Errores que te haya dado:** ¿alucinaciones específicas? ¿Estilo de disculpa?
    - **Calidad relativa:** ¿es claramente nivel frontera o "lo justo y suficiente"?
 
-2. **¿En qué capas del stack creés que invierten más?**
+2. **¿En qué capas del stack crees que invierten más?**
    - ¿Es prompt simple o complejo?
    - ¿Mucho RAG?
    - ¿Agente con tools?
    - ¿Mucho post-procesamiento?
 
-3. **¿Cuánto creés que les cuesta atender a un usuario activo por mes?** Razonalo en orden de magnitud (¿centavos? ¿dólares? ¿decenas de dólares?).
+3. **¿Cuánto crees que les cuesta atender a un usuario activo por mes?** Razónalo en orden de magnitud (¿centavos? ¿dólares? ¿decenas de dólares?).
 
 **No hay respuesta correcta.** El objetivo es entrenar el ojo para "leer" arquitecturas IA desde fuera. Es una habilidad que vas a usar muchísimo cuando empieces a construir la tuya.
 
@@ -123,10 +123,10 @@ Para cada uno, intenta inferir:
 
 **Esta sesión NO agrega código a TiendaPro.** El primer commit del proyecto integrador llega en S01.1 con el setup inicial.
 
-Lo que SÍ podés hacer ahora, opcional, es escribir 1 párrafo de respuesta a:
+Lo que SÍ puedes hacer ahora, opcional, es escribir 1 párrafo de respuesta a:
 
-- ¿Qué modelo creés que usaríamos para TiendaPro en MVP? ¿Por qué?
-- Si TiendaPro escala a 10.000 conversaciones/día con 800 tokens input + 200 tokens output por mensaje, ¿cuánto cuesta por mes con Haiku? (Aplicá lo del ejercicio 2.1.)
+- ¿Qué modelo crees que usaríamos para TiendaPro en MVP? ¿Por qué?
+- Si TiendaPro escala a 10.000 conversaciones/día con 800 tokens input + 200 tokens output por mensaje, ¿cuánto cuesta por mes con Haiku? (Aplica lo del ejercicio 2.1.)
 - ¿Cambia tu decisión de modelo cuando ves el número?
 
 Guarda esto en un doc local. Vamos a referenciarlo en S01.2 cuando hagamos la primera comparativa real entre proveedores.

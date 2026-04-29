@@ -23,20 +23,20 @@ Estas son las librerías Python que vas a usar en el curso, en el orden en que a
 
 - **sentence-transformers** — generar embeddings con modelos de HuggingFace. Lo usaste en el ejercicio 4 y vuelve en M3.
   - https://www.sbert.net/
-- **transformers (HuggingFace)** — la librería madre. Útil cuando necesités modelos más allá de embeddings (cross-encoders, rerankers, etc.).
+- **transformers (HuggingFace)** — la librería madre. Útil cuando necesites modelos más allí de embeddings (cross-encoders, rerankers, etc.).
   - https://huggingface.co/docs/transformers
 - **RAGAS** — framework de evaluación específico para RAG. Aparece en M4.
   - https://docs.ragas.io/
-- **Pydantic** — validación de datos al estilo Zod. La usás cuando quieras tipos en runtime.
+- **Pydantic** — validación de datos al estilo Zod. La usas cuando quieras tipos en runtime.
   - https://docs.pydantic.dev/
-- **FastAPI** — si en algún momento exponés un endpoint Python (poco frecuente en el curso, pero útil saberlo). Es el "Express de Python", muy adoptado en el ecosistema AI.
+- **FastAPI** — si en algún momento expones un endpoint Python (poco frecuente en el curso, pero útil saberlo). Es el "Express de Python", muy adoptado en el ecosistema AI.
   - https://fastapi.tiangolo.com/
 
 ## Aprendizaje general de Python (para devs JS/TS)
 
-- **Real Python** — tutoriales de altísima calidad sobre temas concretos. Búsqueda directa por el concepto que necesités.
+- **Real Python** — tutoriales de altísima calidad sobre temas concretos. Búsqueda directa por el concepto que necesites.
   - https://realpython.com/
-- **Python by Comparison** — recurso pago pero muy útil si querés un mapeo sistemático JS↔Python (similar al doc 02 pero más extenso).
+- **Python by Comparison** — recurso pago pero muy útil si quieres un mapeo sistemático JS↔Python (similar al doc 02 pero más extenso).
   - https://pythonbycomparison.com/
 
 ## Para mantener el reflejo (cheatsheets útiles)

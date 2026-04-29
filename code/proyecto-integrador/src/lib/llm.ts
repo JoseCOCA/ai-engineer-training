@@ -3,9 +3,9 @@
  *
  * Esta es la ÚNICA pieza del proyecto que importa SDKs específicos
  * de proveedores. El resto del código consume el `llm` exportado
- * desde acá, sin saber qué hay detrás.
+ * desde aquí, sin saber qué hay detrás.
  *
- * Para cambiar de proveedor, modificá DEFAULT_LLM_PROVIDER en .env.
+ * Para cambiar de proveedor, modifica DEFAULT_LLM_PROVIDER en .env.
  * No deberías necesitar tocar este archivo durante el curso.
  */
 import { type LanguageModel } from "ai";
@@ -24,7 +24,7 @@ function buildModel(): LanguageModel {
       const baseURL = process.env.OLLAMA_BASE_URL;
       if (!baseURL) {
         throw new Error(
-          "OLLAMA_BASE_URL no está definida. Verificá tu .env (ver env.example en la raíz del repo).",
+          "OLLAMA_BASE_URL no está definida. Verifica tu .env (ver env.example en la raíz del repo).",
         );
       }
       const ollama = createOllama({ baseURL: `${baseURL}/api` });

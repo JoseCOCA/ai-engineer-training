@@ -12,7 +12,7 @@
 python3 --version
 ```
 
-Si te muestra `Python 3.10.x` o superior, estás bien. Si es 3.9 o anterior, instalá una versión moderna (`uv` que vamos a instalar abajo te lo soluciona también).
+Si te muestra `Python 3.10.x` o superior, estás bien. Si es 3.9 o anterior, instala una versión moderna (`uv` que vamos a instalar abajo te lo soluciona también).
 
 ### 1.2. Instalar `uv`
 
@@ -26,7 +26,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Verificá:
+Verifica:
 
 ```bash
 uv --version
@@ -68,7 +68,7 @@ Vas a escribir el mismo programa **dos veces**: una en TS, una en Python. La ide
 
 ### Versión TypeScript (referencia)
 
-Creá `~/playground/python-lab/hello.ts`:
+Crea `~/playground/python-lab/hello.ts`:
 
 ```typescript
 const args = process.argv.slice(2);
@@ -77,17 +77,17 @@ const name = args[0] ?? "AI Engineer";
 console.log(`Hola, ${name}! Tienes ${name.length} letras en tu nombre.`);
 ```
 
-Si tenés `tsx` instalado: `npx tsx hello.ts AnaMaria`.
+Si tienes `tsx` instalado: `npx tsx hello.ts AnaMaria`.
 
 ### Versión Python — escribila vos
 
-Editá `~/playground/python-lab/hello.py` para que haga lo mismo. Pistas:
+Edita `~/playground/python-lab/hello.py` para que haga lo mismo. Pistas:
 
 - Argumentos de línea de comandos: `import sys; sys.argv` (lista de strings).
 - f-strings: `f"Hola, {name}!"`
 - Default value: `name = sys.argv[1] if len(sys.argv) > 1 else "AI Engineer"`
 
-Ejecutá: `uv run hello.py AnaMaria`.
+Ejecuta: `uv run hello.py AnaMaria`.
 
 > **Solución:**
 >
@@ -99,7 +99,7 @@ Ejecutá: `uv run hello.py AnaMaria`.
 > print(f"Hola, {name}! Tienes {len(name)} letras en tu nombre.")
 > ```
 
-**Observá:**
+**Observa:**
 
 - No hay `;` al final de líneas.
 - Indentación es sintaxis (no decoración).
@@ -131,7 +131,7 @@ console.log(celsiusToFahrenheit(25)); // 77
 > print(celsius_to_fahrenheit(25))  # 77.0
 > ```
 >
-> Ojo: en Python la convención es `snake_case` para funciones, no `camelCase`. Y los type hints NO son obligatorios en runtime — son documentación para humanos y para `mypy`. Python no rompe si pasás un string.
+> Ojo: en Python la convención es `snake_case` para funciones, no `camelCase`. Y los type hints NO son obligatorios en runtime — son documentación para humanos y para `mypy`. Python no rompe si pasas un string.
 
 ### 3.2. Validación con tipo (Zod → Pydantic)
 
@@ -150,8 +150,8 @@ console.log(user);
 
 Traducilo a Python con `pydantic`. Pistas:
 
-- Instalá pydantic en tu proyecto: `uv add pydantic email-validator`.
-- Importá `from pydantic import BaseModel, EmailStr, Field`.
+- Instala pydantic en tu proyecto: `uv add pydantic email-validator`.
+- Importa `from pydantic import BaseModel, EmailStr, Field`.
 - `Field(ge=0, le=150)` es el equivalente de `.min(0).max(150)` en Zod.
 
 > **Solución:**
@@ -214,7 +214,7 @@ uv add sentence-transformers numpy
 
 ### 4.2. Crear el script
 
-Creá `~/playground/python-lab/embeddings.py`:
+Crea `~/playground/python-lab/embeddings.py`:
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -264,7 +264,7 @@ Similaridad de la frase 0 con cada otra frase:
   [0.428]  Necesito comprar comida para mi mascota.
 ```
 
-**Detente acá un momento y pensá lo que está pasando:**
+**Detente aquí un momento y piensa lo que está pasando:**
 
 - La frase 0 vs ella misma: similaridad **1.000** (perfecto).
 - La frase 0 vs su paráfrasis ("felino descansa sobre el sofá"): **~0.81** — cerca aunque las palabras sean distintas. **Esto es búsqueda semántica.**
@@ -277,7 +277,7 @@ Similaridad de la frase 0 con cada otra frase:
 
 ### 4.5. Reto bonus
 
-Modificá el script para que pida al usuario una query por consola y le devuelva la frase más similar de la lista. Es ~5 líneas más. **Esto ya es un mini buscador semántico.**
+Modifica el script para que pida al usuario una query por consola y le devuelva la frase más similar de la lista. Es ~5 líneas más. **Esto ya es un mini buscador semántico.**
 
 > **Solución:**
 >
@@ -306,7 +306,7 @@ Modificá el script para que pida al usuario una query por consola y le devuelva
 > print(f"  {frases[best_idx]}")
 > ```
 >
-> Probalo con queries como `"animales descansando"` o `"infraestructura"`.
+> Pruébalo con queries como `"animales descansando"` o `"infraestructura"`.
 
 ---
 
@@ -314,7 +314,7 @@ Modificá el script para que pida al usuario una query por consola y le devuelva
 
 **TiendaPro sigue sin código.** El primer commit del proyecto integrador llega en **S01.1**, ya en TypeScript.
 
-Lo que hiciste en el ejercicio 4 es la prueba de concepto del módulo de búsqueda semántica que vas a construir para el catálogo de TiendaPro en M3. **Guardá ese script** — vamos a referenciarlo cuando llegue el momento.
+Lo que hiciste en el ejercicio 4 es la prueba de concepto del módulo de búsqueda semántica que vas a construir para el catálogo de TiendaPro en M3. **Guarda ese script** — vamos a referenciarlo cuando llegue el momento.
 
 ---
 
@@ -322,9 +322,9 @@ Lo que hiciste en el ejercicio 4 es la prueba de concepto del módulo de búsque
 
 Si terminaste los 4 ejercicios:
 
-- Tenés `uv` instalado y sabés crear proyectos Python desde cero.
-- Sabés mapear los conceptos básicos de TS a Python (types, async, validación, list comprehensions).
-- Computaste tu primer embedding real y entendés por qué la similaridad semántica es la base de RAG.
+- Tienes `uv` instalado y sabes crear proyectos Python desde cero.
+- Sabes mapear los conceptos básicos de TS a Python (types, async, validación, list comprehensions).
+- Computaste tu primer embedding real y entiendes por qué la similaridad semántica es la base de RAG.
 
 **Estás listo para arrancar S01.1 — Setup + primera llamada a un LLM.** A partir de ahí volvemos a TypeScript y empieza el código real de TiendaPro.
 

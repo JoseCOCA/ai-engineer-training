@@ -12,10 +12,10 @@ Material para mantener la comparativa actualizada y profundizar en evaluación r
   - https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard
 - **LMSys Chatbot Arena** — ranking por preferencia humana en comparaciones ciegas. El benchmark "humano" más confiable.
   - https://lmarena.ai
-- **AIDER LLM Leaderboard** — ranking específico para tareas de programación. Útil cuando elegís modelo para casos de código.
+- **AIDER LLM Leaderboard** — ranking específico para tareas de programación. Útil cuando eliges modelo para casos de código.
   - https://aider.chat/docs/leaderboards/
 
-## Pricing oficial (verificá siempre antes de presupuestar)
+## Pricing oficial (verifica siempre antes de presupuestar)
 
 - Anthropic: https://www.anthropic.com/pricing
 - OpenAI: https://openai.com/api/pricing
@@ -44,7 +44,7 @@ Material para mantener la comparativa actualizada y profundizar en evaluación r
 
 ## Sobre tokenización (refresh de S00.2)
 
-- **OpenAI Tokenizer (web)** — pegá texto, ve los tokens.
+- **OpenAI Tokenizer (web)** — pega texto, ve los tokens.
   - https://platform.openai.com/tokenizer
 - **Anthropic — Token Counting docs** — cómo contar tokens de Claude desde tu código.
   - https://docs.anthropic.com/en/docs/build-with-claude/token-counting

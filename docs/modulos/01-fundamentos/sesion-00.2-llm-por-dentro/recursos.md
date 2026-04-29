@@ -15,14 +15,14 @@ Material opcional para profundizar. **Recomendación:** los 2 primeros (3Blue1Br
 
 - **Andrej Karpathy — _Let's build the GPT Tokenizer_** (~2h, YouTube). Implementa BPE desde cero. No hace falta verlo entero — los primeros 30 minutos te dan intuición sólida sobre por qué los modelos tokenizan como tokenizan.
   - https://www.youtube.com/watch?v=zduSFxRajkE
-- **Andrej Karpathy — _Let's build GPT from scratch_** (~2h, YouTube). Construye un GPT desde cero en PyTorch. Avanzado, requiere algo de código. Útil cuando ya tenés el panorama general y querés meter las manos.
+- **Andrej Karpathy — _Let's build GPT from scratch_** (~2h, YouTube). Construye un GPT desde cero en PyTorch. Avanzado, requiere algo de código. Útil cuando ya tienes el panorama general y quieres meter las manos.
   - https://www.youtube.com/watch?v=kCc8FmEb1nY
-- **Jay Alammar — _The Illustrated Transformer_** (post de blog). Versión escrita y visual del Transformer. Excelente complemento si preferís leer.
+- **Jay Alammar — _The Illustrated Transformer_** (post de blog). Versión escrita y visual del Transformer. Excelente complemento si prefieres leer.
   - https://jalammar.github.io/illustrated-transformer/
 
 ## Herramientas prácticas
 
-- **OpenAI Tokenizer Playground** — pegás texto y ves cómo se tokeniza. Lo usaste en el ejercicio 1.
+- **OpenAI Tokenizer Playground** — pegas texto y ves cómo se tokeniza. Lo usaste en el ejercicio 1.
   - https://platform.openai.com/tokenizer
 - **Hugging Face Tokenizers** — librería Python para experimentar con distintos tokenizers (GPT, Llama, Claude, Gemini, etc.).
   - https://huggingface.co/docs/tokenizers
