@@ -1,0 +1,26 @@
+{
+  "name": "@curso-ai/m02-sesion-05-2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S05.2 — Memoria conversacional e historial.",
+  "scripts": {
+    "stateless-vs-history": "tsx --env-file=../../../.env src/stateless-vs-history.ts",
+    "sliding-window": "tsx src/sliding-window-demo.ts",
+    "summarize": "tsx --env-file=../../../.env src/summarize-demo.ts",
+    "persist": "tsx --env-file=../../../.env src/persist-demo.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "gpt-tokenizer": "^3.0.0",
+    "ollama-ai-provider-v2": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
