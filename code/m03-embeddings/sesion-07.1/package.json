@@ -1,0 +1,22 @@
+{
+  "name": "@curso-ai/m03-sesion-07-1",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S07.1 — Chunking de documentos.",
+  "scripts": {
+    "compare-splitters": "tsx src/compare-splitters.ts",
+    "structural": "tsx src/structural.ts",
+    "sizes": "tsx src/sizes.ts",
+    "sentence-aware": "tsx src/sentence-aware.ts"
+  },
+  "dependencies": {
+    "@langchain/textsplitters": "^0.1.0",
+    "gpt-tokenizer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
