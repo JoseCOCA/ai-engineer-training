@@ -1,60 +1,49 @@
 /**
  * TiendaPro — proyecto integrador.
  *
- * Conversación con asistente con personalidad + RAG sobre catálogo real.
+ * Conversación con asistente multi-agente sobre el catálogo y pedidos.
  *
- * Estado al cierre del Módulo 4:
- *   - chat service desde @curso-ai/llm (retry/fallback/instrumentación).
- *   - logging vía onComplete callback → logs/calls.jsonl.
- *   - clasificación de intent estructurada con Zod.
+ * Estado al cierre del Módulo 5:
+ *   - chat service desde @curso-ai/llm (instrumentación, retry, fallback).
+ *   - clasificación estructurada de intent (M2).
  *   - guardrails de input/output.
- *   - **RAG pipeline (M4):** retrieve pgvector + listwise rerank + structured
- *     output con citas validadas. Reemplaza el findProducts keyword del M2.
- *   - memoria conversacional con sliding window por tokens.
- *   - prompts versionados desde archivos.
+ *   - **RAG pipeline (M4):** retrieve pgvector + listwise rerank + citas
+ *     validadas, ahora envuelto como TOOL del catalog worker.
+ *   - **Supervisor multi-agente con LangGraph (M5):** classifier puro
+ *     que rutea a catalog/orders/escalation workers especializados.
+ *     Output validation + recursionLimit de sandboxing.
+ *   - memoria conversacional (M2) — preservada para los turnos donde
+ *     el agente no aplica.
  *
- * Si el retrieval devuelve vacío (query OOD o threshold filtra todo),
- * el flow cae al chat genérico sin contexto inyectado.
+ * Si el supervisor decide intent=escalation, no se usa RAG ni pedidos:
+ * el escalation worker crea un ticket y devuelve handoff al usuario.
  */
-import { chat, ConversationStore, newId } from "@curso-ai/llm";
-import { classifyIntent } from "./lib/intent.js";
+import { ConversationStore, newId } from "@curso-ai/llm";
 import {
   GuardrailViolation,
   validateInput,
   validateOutput,
 } from "./lib/guardrails.js";
-import { logChatResponse } from "./lib/logger.js";
 import { render } from "./lib/prompts.js";
-import { PgVectorStore } from "./retrieval/index.js";
-import { embedQuery, runRagPipeline, EMBEDDING_MODEL, EMBEDDING_VERSION } from "./rag/index.js";
+import { runAgent, shutdownAgent } from "./agent/index.js";
 
 const USER_NAME = "Carlos";
 const LOCALE = "es-ES";
-const CONTEXT_BUDGET_TOKENS = 4000;
 
 const TURNS = [
   "Hola, soy Carlos. Estoy buscando equipo de senderismo.",
   "¿Tienen mochilas para senderismo de fin de semana?",
-  "¿Cuál de las que mencionaste es más liviana?",
-  "Genial, ¿y unas botas que combinen?",
-  "Perfecto. ¿Hacen envío a Madrid?",
+  "¿Cuál es el estado de mi pedido P-1234?",
+  "Y unas botas que aguanten lluvia, ¿tienen?",
+  "Esto no funciona NADA, no me sirve nada de lo que dices",
 ];
 
 async function runConversation(): Promise<void> {
   const conv = new ConversationStore();
-  const supportSystem = render("customer-support.system", {
-    userName: USER_NAME,
-    locale: LOCALE,
-  });
+  // El system del support se mantiene cargado para auditoría / regression tests.
+  render("customer-support.system", { userName: USER_NAME, locale: LOCALE });
 
-  const ragStore = new PgVectorStore({
-    embedder: embedQuery,
-    embeddingModel: EMBEDDING_MODEL,
-    embeddingVersion: EMBEDDING_VERSION,
-  });
-
-  console.log(`=== TiendaPro — conversación con ${USER_NAME} ===`);
-  console.log("");
+  console.log(`=== TiendaPro — conversación con ${USER_NAME} (M5 multi-agente) ===\n`);
 
   try {
     for (const userTurn of TURNS) {
@@ -64,8 +53,7 @@ async function runConversation(): Promise<void> {
         validateInput(userTurn);
       } catch (error) {
         if (error instanceof GuardrailViolation) {
-          console.log(`  [bloqueado por input guardrail: ${error.kind}]`);
-          console.log("");
+          console.log(`  [bloqueado por input guardrail: ${error.kind}]\n`);
           continue;
         }
         throw error;
@@ -78,58 +66,13 @@ async function runConversation(): Promise<void> {
         createdAt: new Date().toISOString(),
       });
 
-      const intent = await classifyIntent(userTurn);
-      console.log(`  [intent: ${intent.intent} (${intent.confidence.toFixed(2)})]`);
-
-      let responseText: string;
-      let metricsLine: string;
-      let ragHandled = false;
-
-      if (intent.intent === "pregunta") {
-        const rag = await runRagPipeline(ragStore, userTurn);
-        if (rag.chunks.length > 0 && rag.validation.ok) {
-          ragHandled = true;
-          responseText = rag.answer;
-          console.log(`  [retrieved: ${rag.chunks.map((c) => c.id).join(", ")}]`);
-          metricsLine = `[rag: ${rag.metrics.totalMs}ms (retrieve ${rag.metrics.retrieveMs} + rerank ${rag.metrics.rerankMs} + gen ${rag.metrics.generateMs}), ${rag.citations.length} citas]`;
-        } else if (rag.chunks.length > 0 && !rag.validation.ok) {
-          console.log(
-            `  [rag: citas inválidas (${rag.validation.invalidCitations.join(",")}) — fallback a chat sin contexto]`,
-          );
-          responseText = "";
-          metricsLine = "";
-        } else {
-          console.log("  [retrieval vacío — fallback a chat sin contexto]");
-          responseText = "";
-          metricsLine = "";
-        }
-      } else {
-        responseText = "";
-        metricsLine = "";
-      }
-
-      if (!ragHandled) {
-        const window = conv.getContextWindow(CONTEXT_BUDGET_TOKENS);
-        const response = await chat({
-          system: supportSystem,
-          messages: window.map((m) => ({
-            role: m.role === "assistant" ? "assistant" : "user",
-            content: m.content,
-          })),
-          flow: `chat-${intent.intent}`,
-          maxOutputTokens: 300,
-          onComplete: logChatResponse,
-        });
-        responseText = response.text;
-        metricsLine = `[${response.latencyMs}ms, ${response.outputTokens} out, $${response.costUsd.toFixed(6)}]`;
-      }
+      const result = await runAgent(userTurn);
 
       try {
-        validateOutput(responseText);
+        validateOutput(result.answer);
       } catch (error) {
         if (error instanceof GuardrailViolation) {
-          console.log(`  [bloqueado por output guardrail: ${error.kind}]`);
-          console.log("");
+          console.log(`  [bloqueado por output guardrail: ${error.kind}]\n`);
           continue;
         }
         throw error;
@@ -138,19 +81,18 @@ async function runConversation(): Promise<void> {
       conv.addMessage({
         id: newId(),
         role: "assistant",
-        content: responseText,
+        content: result.answer,
         createdAt: new Date().toISOString(),
-        flow: `chat-${intent.intent}`,
+        flow: `agent-${result.intent}`,
       });
 
-      console.log(`  ${responseText}`);
-      console.log(`  ${metricsLine}`);
-      console.log("");
+      console.log(`  [intent: ${result.intent}, ${result.elapsedMs}ms]`);
+      console.log(`  ${result.answer}\n`);
     }
 
     console.log(`=== Fin de la conversación. Mensajes totales: ${conv.size()} ===`);
   } finally {
-    await ragStore.close();
+    await shutdownAgent();
   }
 }
 

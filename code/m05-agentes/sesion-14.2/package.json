@@ -1,0 +1,24 @@
+{
+  "name": "@curso-ai/m05-sesion-14.2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S14.2 — HITL, seguridad y sandboxing.",
+  "scripts": {
+    "approval-gate": "tsx --env-file=../../../.env src/01-approval-gate.ts",
+    "sandboxing": "tsx --env-file=../../../.env src/02-sandboxing.ts",
+    "escalation": "tsx --env-file=../../../.env src/03-escalation.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.1.0",
+    "@langchain/google-genai": "^2.1.0",
+    "@langchain/langgraph": "^1.2.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}

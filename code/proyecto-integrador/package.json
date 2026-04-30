@@ -1,6 +1,6 @@
 {
   "name": "@curso-ai/proyecto-integrador",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "description": "TiendaPro — agente de soporte conversacional para e-commerce. Proyecto integrador del curso AI Engineer.",
@@ -12,11 +12,15 @@
     "test:regression": "vitest run __tests__/prompts.regression.test.ts",
     "test:retrieval": "vitest run __tests__/retrieval.test.ts",
     "test:rag": "vitest run __tests__/rag.test.ts",
+    "test:agent": "vitest run __tests__/agent.test.ts",
     "test:evals": "tsx --env-file=../../.env evals/run-evals.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.0",
     "@curso-ai/llm": "workspace:*",
+    "@langchain/core": "^1.1.0",
+    "@langchain/google-genai": "^2.1.0",
+    "@langchain/langgraph": "^1.2.0",
     "ai": "^5.0.0",
     "gpt-tokenizer": "^3.0.0",
     "pg": "^8.13.0",
