@@ -6,18 +6,23 @@
   "description": "TiendaPro — agente de soporte conversacional para e-commerce. Proyecto integrador del curso AI Engineer.",
   "scripts": {
     "dev": "tsx --env-file=../../.env src/index.ts",
+    "index-catalog": "tsx --env-file=../../.env scripts/index-catalog.ts",
     "test": "vitest run",
     "test:snapshot": "vitest run __tests__/prompts.snapshot.test.ts",
-    "test:regression": "vitest run __tests__/prompts.regression.test.ts"
+    "test:regression": "vitest run __tests__/prompts.regression.test.ts",
+    "test:retrieval": "vitest run __tests__/retrieval.test.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
     "@curso-ai/llm": "workspace:*",
     "ai": "^5.0.0",
     "gpt-tokenizer": "^3.0.0",
+    "pg": "^8.13.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
     "tsx": "^4.20.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
