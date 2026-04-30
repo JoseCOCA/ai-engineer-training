@@ -8,10 +8,10 @@ import { Annotation, StateGraph, START, END } from "@langchain/langgraph";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 const State = Annotation.Root({
-  question: Annotation<string>({ reducer: (_l, r) => r, default: () => "" }),
-  research: Annotation<string>({ reducer: (_l, r) => r, default: () => "" }),
-  draft: Annotation<string>({ reducer: (_l, r) => r, default: () => "" }),
-  finalAnswer: Annotation<string>({ reducer: (_l, r) => r, default: () => "" }),
+  question: Annotation<string>({ reducer: (_l: string, r: string) => r, default: () => "" }),
+  research: Annotation<string>({ reducer: (_l: string, r: string) => r, default: () => "" }),
+  draft: Annotation<string>({ reducer: (_l: string, r: string) => r, default: () => "" }),
+  finalAnswer: Annotation<string>({ reducer: (_l: string, r: string) => r, default: () => "" }),
 });
 
 type StateType = typeof State.State;
