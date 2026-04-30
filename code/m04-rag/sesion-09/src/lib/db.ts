@@ -1,0 +1,21 @@
+/**
+ * Pool de Postgres + helpers para pgvector.
+ *
+ * Vectores serializados como string ('[a,b,c]') y casteados con ::vector
+ * en el SQL. Mismo patrón que S08, sin adaptadores de tipo.
+ */
+import pg from "pg";
+
+export function createPool(): pg.Pool {
+  return new pg.Pool({
+    user: process.env.POSTGRES_USER ?? "curso",
+    password: process.env.POSTGRES_PASSWORD ?? "curso",
+    database: process.env.POSTGRES_DB ?? "curso_ai",
+    host: process.env.POSTGRES_HOST ?? "localhost",
+    port: Number.parseInt(process.env.POSTGRES_PORT ?? "5432", 10),
+  });
+}
+
+export function vectorToSql(arr: number[]): string {
+  return `[${arr.join(",")}]`;
+}

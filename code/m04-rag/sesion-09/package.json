@@ -1,0 +1,26 @@
+{
+  "name": "@curso-ai/m04-sesion-09",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S09 — Fundamentos de RAG y técnicas de recuperación.",
+  "scripts": {
+    "naive-rag": "tsx --env-file=../../../.env src/01-naive-rag.ts",
+    "rag-vs-no-rag": "tsx --env-file=../../../.env src/02-rag-vs-no-rag.ts",
+    "top-k-tradeoffs": "tsx --env-file=../../../.env src/03-top-k-tradeoffs.ts",
+    "failure-modes": "tsx --env-file=../../../.env src/04-failure-modes.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
+    "@curso-ai/llm": "workspace:*",
+    "ai": "^5.0.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
