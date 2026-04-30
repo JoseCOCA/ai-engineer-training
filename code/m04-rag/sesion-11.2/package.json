@@ -1,0 +1,26 @@
+{
+  "name": "@curso-ai/m04-sesion-11.2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S11.2 — Citas, control de alucinaciones y mantenimiento del índice.",
+  "scripts": {
+    "citas-verificadas": "tsx --env-file=../../../.env src/01-citas-verificadas.ts",
+    "faithfulness-check": "tsx --env-file=../../../.env src/02-faithfulness-check.ts",
+    "index-migration": "tsx --env-file=../../../.env src/03-index-migration.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
+    "@curso-ai/llm": "workspace:*",
+    "ai": "^5.0.0",
+    "pg": "^8.13.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
