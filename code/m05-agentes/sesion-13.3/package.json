@@ -1,0 +1,24 @@
+{
+  "name": "@curso-ai/m05-sesion-13.3",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S13.3 — Estado, errores y observabilidad.",
+  "scripts": {
+    "checkpointer": "tsx --env-file=../../../.env src/01-checkpointer.ts",
+    "error-handling": "tsx --env-file=../../../.env src/02-error-handling.ts",
+    "tracing": "tsx --env-file=../../../.env src/03-tracing.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.1.0",
+    "@langchain/google-genai": "^2.1.0",
+    "@langchain/langgraph": "^1.2.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
