@@ -1,0 +1,22 @@
+{
+  "name": "@curso-ai/m03-sesion-07-3",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S07.3 — Espacio vectorial, búsqueda semántica y pre-procesamiento.",
+  "scripts": {
+    "compare-distances": "tsx --env-file=../../../.env src/compare-distances.ts",
+    "threshold-calibration": "tsx --env-file=../../../.env src/threshold-calibration.ts",
+    "preprocess-test": "tsx --env-file=../../../.env src/preprocess-test.ts",
+    "failure-modes": "tsx --env-file=../../../.env src/failure-modes.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
+    "ai": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
