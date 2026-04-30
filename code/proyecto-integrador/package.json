@@ -10,7 +10,9 @@
     "test": "vitest run",
     "test:snapshot": "vitest run __tests__/prompts.snapshot.test.ts",
     "test:regression": "vitest run __tests__/prompts.regression.test.ts",
-    "test:retrieval": "vitest run __tests__/retrieval.test.ts"
+    "test:retrieval": "vitest run __tests__/retrieval.test.ts",
+    "test:rag": "vitest run __tests__/rag.test.ts",
+    "test:evals": "tsx --env-file=../../.env evals/run-evals.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.0",

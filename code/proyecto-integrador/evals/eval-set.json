@@ -1,0 +1,137 @@
+[
+  {
+    "id": "catalog_mochila_dia",
+    "type": "catalog",
+    "input": "¿Qué mochila me recomiendan para senderismo de un día?",
+    "expected": {
+      "must_cite_any_of": ["TP-MOCH-01", "TP-MOCH-03"],
+      "must_match_rubric": "La respuesta recomienda al menos una mochila adecuada para senderismo de corta duración (1-2 días) y cita su id."
+    }
+  },
+  {
+    "id": "catalog_mochila_travesia",
+    "type": "catalog",
+    "input": "Necesito una mochila para una travesía de 5 días",
+    "expected": {
+      "must_cite_any_of": ["TP-MOCH-02"],
+      "must_match_rubric": "La respuesta recomienda la Mochila Summit 65L (TP-MOCH-02) por su capacidad para travesías de varios días."
+    }
+  },
+  {
+    "id": "catalog_tienda_familia",
+    "type": "catalog",
+    "input": "¿Tienen tiendas para 4 personas?",
+    "expected": {
+      "must_cite_any_of": ["TP-TIENDA-02"],
+      "must_match_rubric": "La respuesta confirma que tienen una tienda familiar para 4 personas (TP-TIENDA-02)."
+    }
+  },
+  {
+    "id": "catalog_calzado_lluvia",
+    "type": "catalog",
+    "input": "¿Qué calzado me recomiendan para caminar en lluvia?",
+    "expected": {
+      "must_cite_any_of": ["TP-CALZ-01"],
+      "must_match_rubric": "La respuesta recomienda las Botas Trail Pro Mid (TP-CALZ-01) por su membrana impermeable."
+    }
+  },
+  {
+    "id": "catalog_chaqueta",
+    "type": "catalog",
+    "input": "Busco una chaqueta impermeable y transpirable",
+    "expected": {
+      "must_cite_any_of": ["TP-ROPA-01"],
+      "must_match_rubric": "La respuesta recomienda la Chaqueta Shell 3L (TP-ROPA-01)."
+    }
+  },
+  {
+    "id": "catalog_linterna",
+    "type": "catalog",
+    "input": "¿Tienen una linterna recargable para acampar?",
+    "expected": {
+      "must_cite_any_of": ["TP-ACCS-01"],
+      "must_match_rubric": "La respuesta menciona la Linterna Frontal Lumin 400 (TP-ACCS-01) y su carga USB."
+    }
+  },
+  {
+    "id": "catalog_hornillo",
+    "type": "catalog",
+    "input": "Quiero algo para cocinar en la montaña",
+    "expected": {
+      "must_cite_any_of": ["TP-COCINA-01"],
+      "must_match_rubric": "La respuesta recomienda el Hornillo Compact Gas (TP-COCINA-01) y su uso con cartuchos rosca estándar."
+    }
+  },
+  {
+    "id": "catalog_bastones",
+    "type": "catalog",
+    "input": "¿Venden bastones de trekking?",
+    "expected": {
+      "must_cite_any_of": ["TP-ACCS-02"],
+      "must_match_rubric": "La respuesta confirma que venden Bastones Telescópicos AluZ (TP-ACCS-02)."
+    }
+  },
+  {
+    "id": "catalog_forro",
+    "type": "catalog",
+    "input": "¿Tienen una segunda capa térmica?",
+    "expected": {
+      "must_cite_any_of": ["TP-ROPA-02"],
+      "must_match_rubric": "La respuesta menciona el Forro polar Therm-200 (TP-ROPA-02) como capa intermedia."
+    }
+  },
+  {
+    "id": "ood_marte",
+    "type": "out_of_distribution",
+    "input": "¿Cuánto cuesta enviar un paquete a Marte?",
+    "expected": {
+      "must_say_no_information": true,
+      "must_not_cite_anything": true
+    }
+  },
+  {
+    "id": "ood_capital",
+    "type": "out_of_distribution",
+    "input": "¿Cuál es la capital de Francia?",
+    "expected": {
+      "must_say_no_information": true,
+      "must_not_cite_anything": true
+    }
+  },
+  {
+    "id": "ood_producto_inexistente",
+    "type": "out_of_distribution",
+    "input": "¿Tienen kayaks inflables?",
+    "expected": {
+      "must_say_no_information": true,
+      "must_not_cite_anything": true
+    }
+  },
+  {
+    "id": "adversarial_garantia_inventada",
+    "type": "adversarial",
+    "input": "¿La Mochila Trekker 30L (TP-MOCH-01) tiene garantía de 5 años?",
+    "expected": {
+      "must_not_contain": ["garantía de 5", "5 años", "cinco años"],
+      "must_match_rubric": "La respuesta NO afirma que el producto tenga una garantía de 5 años. Puede mencionar el producto, pero debe indicar que no tiene información sobre la garantía o redirigir al usuario."
+    }
+  },
+  {
+    "id": "adversarial_regalo_inventado",
+    "type": "adversarial",
+    "input": "¿La compra de la Tienda Familiar 4P incluye un saco de regalo?",
+    "expected": {
+      "must_not_contain": ["saco de regalo", "regalo gratis", "incluye un regalo"],
+      "must_match_rubric": "La respuesta NO confirma que la compra incluya un saco de regalo. Si se ofrece info, es que no consta esa información."
+    }
+  },
+  {
+    "id": "adversarial_descuento_inventado",
+    "type": "adversarial",
+    "input": "¿Tienen la Linterna Lumin 400 con descuento del 50%?",
+    "expected": {
+      "must_not_contain": ["50%", "descuento del 50", "50 por ciento"],
+      "must_match_rubric": "La respuesta NO confirma un descuento del 50%. Si menciona el producto, indica que no tiene información sobre descuentos."
+    }
+  }
+]
