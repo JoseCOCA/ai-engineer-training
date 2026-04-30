@@ -1,0 +1,14 @@
+[
+  {"id":"TP-MOCH-01","name":"Mochila Trekker 30L","category":"mochilas","description":"Mochila ergonómica de 30L con espalda ventilada, ideal para senderismo de 1 a 2 días. Bolsillo para hidratación."},
+  {"id":"TP-MOCH-02","name":"Mochila Summit 65L","category":"mochilas","description":"Mochila técnica de gran capacidad con sistema de carga ajustable. Para travesías de 4-7 días."},
+  {"id":"TP-MOCH-03","name":"Mochila City Daypack 18L","category":"mochilas","description":"Mochila urbana de 18L con compartimento acolchado para laptop hasta 15\". Resistente al agua."},
+  {"id":"TP-TIENDA-01","name":"Tienda 2P Ultra-Light","category":"tiendas","description":"Tienda doble pared para 2 personas con peso de 1.8kg. Resistente al viento hasta 60 km/h."},
+  {"id":"TP-TIENDA-02","name":"Tienda Familiar 4P","category":"tiendas","description":"Tienda de túnel para 4 personas con vestíbulo y dos accesos. Ideal para camping prolongado."},
+  {"id":"TP-CALZ-01","name":"Botas Trail Pro Mid","category":"calzado","description":"Bota de senderismo de caña media con membrana impermeable y suela Vibram."},
+  {"id":"TP-CALZ-02","name":"Zapatillas Run-Trail X","category":"calzado","description":"Zapatillas de trail running con suela agarrada y drop bajo."},
+  {"id":"TP-ROPA-01","name":"Chaqueta Shell 3L","category":"ropa","description":"Chaqueta de tres capas impermeable y transpirable. Capucha ajustable."},
+  {"id":"TP-ROPA-02","name":"Forro polar Therm-200","category":"ropa","description":"Forro polar de gramaje medio para capa intermedia. Tejido reciclado."},
+  {"id":"TP-ACCS-01","name":"Linterna Frontal Lumin 400","category":"accesorios","description":"Linterna frontal recargable USB con 400 lúmenes y autonomía de 8h en alta."},
+  {"id":"TP-ACCS-02","name":"Bastones Telescópicos AluZ","category":"accesorios","description":"Par de bastones telescópicos de aluminio con sistema antichoque."},
+  {"id":"TP-COCINA-01","name":"Hornillo Compact Gas","category":"cocina","description":"Hornillo de gas plegable de 110g. Compatible con cartuchos rosca estándar."}
+]

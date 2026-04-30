@@ -1,0 +1,110 @@
+[
+  {
+    "id": "TP-MOCH-01",
+    "name": "Mochila Trekker 30L",
+    "category": "mochilas",
+    "price": 89.90,
+    "description": "Mochila ergonómica de 30L con espalda ventilada, ideal para senderismo de 1 a 2 días. Bolsillo para hidratación y compartimento exterior para chaqueta.",
+    "inStock": true,
+    "tags": ["senderismo", "1 dia", "2 dias", "30L", "ventilada", "hidratacion"]
+  },
+  {
+    "id": "TP-MOCH-02",
+    "name": "Mochila Summit 65L",
+    "category": "mochilas",
+    "price": 189.00,
+    "description": "Mochila técnica de gran capacidad con sistema de carga ajustable. Para travesías de 4-7 días con equipo completo.",
+    "inStock": true,
+    "tags": ["expedicion", "65L", "gran capacidad", "travesia"]
+  },
+  {
+    "id": "TP-MOCH-03",
+    "name": "Mochila City Daypack 18L",
+    "category": "mochilas",
+    "price": 49.90,
+    "description": "Mochila urbana de 18L con compartimento acolchado para laptop hasta 15\". Material resistente al agua.",
+    "inStock": true,
+    "tags": ["urbana", "laptop", "18L", "ciudad"]
+  },
+  {
+    "id": "TP-TIENDA-01",
+    "name": "Tienda 2P Ultra-Light",
+    "category": "tiendas",
+    "price": 219.00,
+    "description": "Tienda doble pared para 2 personas con peso de 1.8kg. Resistente al viento hasta 60 km/h.",
+    "inStock": true,
+    "tags": ["2 personas", "ultraligera", "doble pared"]
+  },
+  {
+    "id": "TP-TIENDA-02",
+    "name": "Tienda Familiar 4P",
+    "category": "tiendas",
+    "price": 379.00,
+    "description": "Tienda de túnel para 4 personas con vestíbulo y dos accesos. Ideal para camping prolongado en familia.",
+    "inStock": false,
+    "tags": ["4 personas", "familiar", "vestibulo", "camping"]
+  },
+  {
+    "id": "TP-CALZ-01",
+    "name": "Botas Trail Pro Mid",
+    "category": "calzado",
+    "price": 159.00,
+    "description": "Bota de senderismo de caña media con membrana impermeable y suela Vibram. Para terrenos mixtos.",
+    "inStock": true,
+    "tags": ["botas", "senderismo", "impermeable", "Vibram"]
+  },
+  {
+    "id": "TP-CALZ-02",
+    "name": "Zapatillas Run-Trail X",
+    "category": "calzado",
+    "price": 119.00,
+    "description": "Zapatillas de trail running con suela agarrada y drop bajo. Para correr por sendero seco y mixto.",
+    "inStock": true,
+    "tags": ["trail running", "drop bajo", "ligeras"]
+  },
+  {
+    "id": "TP-ROPA-01",
+    "name": "Chaqueta Shell 3L",
+    "category": "ropa",
+    "price": 219.00,
+    "description": "Chaqueta de tres capas impermeable y transpirable. Capucha ajustable. Tallas S a XL.",
+    "inStock": true,
+    "tags": ["impermeable", "shell", "3 capas", "transpirable"]
+  },
+  {
+    "id": "TP-ROPA-02",
+    "name": "Forro polar Therm-200",
+    "category": "ropa",
+    "price": 79.90,
+    "description": "Forro polar de gramaje medio para capa intermedia. Tejido reciclado.",
+    "inStock": true,
+    "tags": ["forro polar", "capa intermedia", "reciclado"]
+  },
+  {
+    "id": "TP-ACCS-01",
+    "name": "Linterna Frontal Lumin 400",
+    "category": "accesorios",
+    "price": 39.90,
+    "description": "Linterna frontal recargable USB con 400 lúmenes y autonomía de 8h en alta.",
+    "inStock": true,
+    "tags": ["linterna", "frontal", "USB", "400 lumenes"]
+  },
+  {
+    "id": "TP-ACCS-02",
+    "name": "Bastones Telescópicos AluZ",
+    "category": "accesorios",
+    "price": 59.00,
+    "description": "Par de bastones telescópicos de aluminio con sistema antichoque y empuñadura de corcho.",
+    "inStock": true,
+    "tags": ["bastones", "aluminio", "antichoque"]
+  },
+  {
+    "id": "TP-COCINA-01",
+    "name": "Hornillo Compact Gas",
+    "category": "cocina",
+    "price": 49.00,
+    "description": "Hornillo de gas plegable de 110g. Compatible con cartuchos rosca estándar. Encendido piezoeléctrico.",
+    "inStock": true,
+    "tags": ["hornillo", "gas", "plegable", "piezoelectrico"]
+  }
+]

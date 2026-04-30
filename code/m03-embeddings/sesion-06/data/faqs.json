@@ -1,0 +1,42 @@
+[
+  {
+    "id": "faq-envio-tiempo",
+    "question": "¿Cuánto tarda el envío?",
+    "answer": "Los envíos a península llegan en 2-4 días hábiles desde que confirmamos el pedido. Para zonas remotas e islas, 4-7 días."
+  },
+  {
+    "id": "faq-envio-costo",
+    "question": "¿Cuánto cuesta el envío?",
+    "answer": "Envío gratuito en pedidos de más de 50€ a península. Para pedidos menores y zonas remotas, el costo aparece al confirmar la dirección."
+  },
+  {
+    "id": "faq-devoluciones",
+    "question": "¿Cómo devuelvo un producto?",
+    "answer": "Tienes 30 días desde la entrega para devolver cualquier producto en su estado original. Generamos la etiqueta de retorno gratis desde tu cuenta."
+  },
+  {
+    "id": "faq-cobro-incorrecto",
+    "question": "¿Cómo gestiono un cobro incorrecto?",
+    "answer": "Si detectas un cobro incorrecto, abre un ticket desde la sección 'Mis pedidos' y nuestro equipo lo resuelve en 48 horas hábiles."
+  },
+  {
+    "id": "faq-pago-metodos",
+    "question": "¿Qué métodos de pago aceptan?",
+    "answer": "Aceptamos tarjetas Visa, Mastercard, American Express, PayPal, Bizum y transferencia bancaria para pedidos superiores a 200€."
+  },
+  {
+    "id": "faq-stock",
+    "question": "¿Por qué hay productos sin stock?",
+    "answer": "Marcamos como 'sin stock' los productos cuyo proveedor no nos confirmó reposición en menos de 14 días. Puedes activar avisos de reposición."
+  },
+  {
+    "id": "faq-talles",
+    "question": "¿Cómo elijo la talla correcta?",
+    "answer": "Cada producto tiene una guía de tallas en la pestaña 'Tallas'. Si dudas, recomendamos pedir un cambio gratuito dentro de los 30 días."
+  },
+  {
+    "id": "faq-cambio-direccion",
+    "question": "¿Puedo cambiar la dirección de envío después de pagar?",
+    "answer": "Sí, mientras el pedido esté en estado 'preparándose'. Una vez en transporte, debes coordinar con la empresa de mensajería."
+  }
+]
