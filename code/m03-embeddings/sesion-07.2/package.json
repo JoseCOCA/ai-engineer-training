@@ -1,0 +1,22 @@
+{
+  "name": "@curso-ai/m03-sesion-07-2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S07.2 — Teoría de embeddings y modelos.",
+  "scripts": {
+    "compare-providers": "tsx --env-file=../../../.env src/compare-providers.ts",
+    "mrl": "tsx --env-file=../../../.env src/mrl.ts",
+    "domain-test": "tsx --env-file=../../../.env src/domain-test.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
