@@ -1,0 +1,26 @@
+{
+  "name": "@curso-ai/m03-sesion-08",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S08 — Bases de datos vectoriales (pgvector + Qdrant).",
+  "scripts": {
+    "setup-schema": "tsx --env-file=../../../.env src/01-setup-and-schema.ts",
+    "ingest-catalog": "tsx --env-file=../../../.env src/02-ingest-catalog.ts",
+    "search": "tsx --env-file=../../../.env src/03-search-with-threshold.ts",
+    "filter": "tsx --env-file=../../../.env src/04-filter-by-category.ts",
+    "qdrant-mirror": "tsx --env-file=../../../.env src/05-qdrant-mirror.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^2.0.0",
+    "@qdrant/js-client-rest": "^1.10.0",
+    "ai": "^5.0.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
