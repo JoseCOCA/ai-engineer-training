@@ -392,6 +392,37 @@ importers:
         specifier: ^5.7.0
         version: 5.9.3
 
+  code/m04-rag/sesion-10:
+    dependencies:
+      '@ai-sdk/google':
+        specifier: ^2.0.0
+        version: 2.0.71(zod@3.25.76)
+      '@curso-ai/llm':
+        specifier: workspace:*
+        version: link:../../packages/llm
+      ai:
+        specifier: ^5.0.0
+        version: 5.0.180(zod@3.25.76)
+      pg:
+        specifier: ^8.13.0
+        version: 8.20.0
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.17
+      '@types/pg':
+        specifier: ^8.11.0
+        version: 8.20.0
+      tsx:
+        specifier: ^4.20.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+
   code/packages/llm:
     dependencies:
       '@ai-sdk/anthropic':
