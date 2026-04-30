@@ -1,0 +1,24 @@
+{
+  "name": "@curso-ai/m05-sesion-12",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S12 — Introducción a agentes (sin framework).",
+  "scripts": {
+    "agent-loop": "tsx --env-file=../../../.env src/01-agent-loop.ts",
+    "tool-calling": "tsx --env-file=../../../.env src/02-tool-calling.ts",
+    "react-explicit": "tsx --env-file=../../../.env src/03-react-explicit.ts",
+    "termination": "tsx --env-file=../../../.env src/04-termination-conditions.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@curso-ai/llm": "workspace:*",
+    "ai": "^5.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
