@@ -36,7 +36,7 @@ Abre `src/01-hello-world.ts` y modifica:
 
 ## 2. Ejercicio guiado: ReAct agent con `createReactAgent`
 
-**Objetivo:** ver el equivalente LangGraph del demo de S12, y notar lo que el helper hace por vos.
+**Objetivo:** ver el equivalente LangGraph del demo de S12, y notar lo que el helper hace por ti.
 
 ### 2.1. Probarlo
 
@@ -49,7 +49,7 @@ Una query, dos tools (`searchCatalog`, `getStockLevel`), `createReactAgent` arma
 ### 2.2. Para reflexionar
 
 - `createReactAgent` arma un grafo de 2 nodos (`agent`, `tools`) con conditional edges. Equivalente al `runAgent` de S12 — pero como grafo.
-- Si querés ver el grafo: `console.log((await agent.getGraphAsync()).drawMermaid())`. Te imprime un diagrama Mermaid.
+- Si quieres ver el grafo: `console.log((await agent.getGraphAsync()).drawMermaid())`. Te imprime un diagrama Mermaid.
 
 ---
 
