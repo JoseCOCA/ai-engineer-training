@@ -2,18 +2,19 @@
 
 Asistente conversacional para un e-commerce ficticio. Crece módulo a módulo a lo largo del curso.
 
-## Estado actual — Hito M2 (`proyecto-m2`)
+## Estado actual — Hito M4 (`proyecto-m4`)
 
-**Asistente conversacional con personalidad.** Capacidades implementadas:
+**Asistente conversacional con RAG real sobre catálogo, citas validadas y suite de evals.** Capacidades acumuladas:
 
-- **Chat service** — consume `chat()` y `chatStream()` desde `@curso-ai/llm` (workspace package). Retry exponencial + fallback al proveedor secundario + instrumentación por flow + onComplete callback para logging.
-- **Logger propio** (`src/lib/logger.ts`) — sink local que escribe `logs/calls.jsonl` desde el callback de `@curso-ai/llm`.
+- **Chat service** — consume `chat()` y `chatStream()` desde `@curso-ai/llm`. Retry + fallback + instrumentación por flow.
+- **Logger propio** (`src/lib/logger.ts`) — sink que escribe `logs/calls.jsonl` desde el callback de `@curso-ai/llm`.
 - **Clasificación estructurada de intent** (`src/lib/intent.ts`) — `generateObject` + Zod sobre `pregunta | reclamo | derivar`.
-- **Guardrails** de input/output (`src/lib/guardrails.ts`) — patrones sospechosos, longitud, mención de competidores.
-- **Inyección de contexto** desde catálogo (`src/lib/catalog.ts` + `data/catalog.json`) usando query-then-inject.
+- **Guardrails** de input/output (`src/lib/guardrails.ts`).
+- **RAG pipeline real** (`src/rag/`, M4): retrieve pgvector → listwise rerank con Gemini Flash → structured output `{ answer, citations[] }` con zod → validación de citas (Nivel 1). Reemplaza el `findProducts` keyword del M2 cuando el intent es `pregunta`. Si retrieval vacío o citas inválidas → fallback al chat sin contexto.
 - **Memoria conversacional** — `ConversationStore` desde `@curso-ai/llm` con sliding window por tokens.
-- **Prompts versionados** en `prompts/` con renderer bound al directorio del proyecto (`src/lib/prompts.ts` usa `makePromptRenderer` de `@curso-ai/llm`).
-- **Tests** (snapshot + regression) en `__tests__/` con Vitest.
+- **Prompts versionados** en `prompts/`.
+- **Tests Ring 1** — unit del validador de citas (`__tests__/rag.test.ts`) + snapshot/regression de prompts.
+- **Suite de evals Ring 2** — `evals/eval-set.json` con 15 casos (catalog/OOD/adversarial) + runner Promptfoo-like (`evals/run-evals.ts`) con 5 asserts y threshold configurable para CI.
 
 ## Setup
 
@@ -54,10 +55,15 @@ Salida esperada (resumida):
 ## Tests
 
 ```bash
-pnpm test                # snapshot + regression
-pnpm run test:snapshot   # solo snapshot del template
-pnpm run test:regression # solo regression sobre eval set (hace llamadas reales)
+pnpm test                # snapshot + regression + retrieval + rag
+pnpm run test:snapshot   # snapshot del template renderizado
+pnpm run test:regression # regression sobre eval-set de prompts (hace llamadas reales)
+pnpm run test:retrieval  # smoke test del retriever pgvector
+pnpm run test:rag        # unit del validador de citas RAG
+pnpm run test:evals      # Ring 2: eval set RAG completo (Promptfoo-like)
 ```
+
+`test:evals` corre el pipeline RAG completo contra `evals/eval-set.json`. Requiere Postgres con catálogo indexado y `GOOGLE_GENERATIVE_AI_API_KEY`. Threshold configurable con `EVALS_THRESHOLD=0.85`.
 
 ## Cambiar de proveedor LLM
 
@@ -77,18 +83,36 @@ prompts/
 data/
 └── catalog.json                 ← 12 productos mock
 
+sql/
+└── 001-products-schema.sql      ← schema pgvector (M3)
+
+scripts/
+└── index-catalog.ts             ← ingesta del catálogo en pgvector (M3)
+
 src/
-├── index.ts                     ← demo de conversación de 5 turnos
-└── lib/
-    ├── intent.ts                ← classifyIntent con generateObject + Zod
-    ├── guardrails.ts            ← validateInput / validateOutput
-    ├── catalog.ts               ← findProducts(query) sobre catalog.json (M3 lo cambia por embeddings)
-    ├── logger.ts                ← logChatResponse → logs/calls.jsonl
-    └── prompts.ts               ← render bound al directorio prompts/
+├── index.ts                     ← demo de conversación con RAG (M4)
+├── lib/
+│   ├── intent.ts                ← classifyIntent con generateObject + Zod
+│   ├── guardrails.ts            ← validateInput / validateOutput
+│   ├── catalog.ts               ← findProducts(query) — fallback legacy del M2
+│   ├── logger.ts                ← logChatResponse → logs/calls.jsonl
+│   └── prompts.ts               ← render bound al directorio prompts/
+├── retrieval/
+│   └── pgvector-store.ts        ← cliente pgvector (M3)
+└── rag/                         ← M4: pipeline RAG completo
+    ├── pipeline.ts              ← runRagPipeline (retrieve + rerank + cite)
+    ├── citations.ts             ← validateCitations (Nivel 1)
+    └── embedder.ts              ← embedQuery con gemini-embedding-001
 
 __tests__/
 ├── prompts.snapshot.test.ts     ← snapshot del template renderizado
-└── prompts.regression.test.ts   ← regression sobre eval-set.json
+├── prompts.regression.test.ts   ← regression sobre eval-set.json
+├── retrieval.test.ts            ← smoke del retriever pgvector
+└── rag.test.ts                  ← unit del validador de citas
+
+evals/                           ← M4: Ring 2 del integrador
+├── eval-set.json                ← 15 casos catalog/OOD/adversarial
+└── run-evals.ts                 ← runner con asserts + threshold para CI
 ```
 
 La frontera del producto LLM (chat, retry, fallback, providers, conversation store, prompt-template engine) vive en `code/packages/llm/` (`@curso-ai/llm`).
@@ -99,8 +123,8 @@ La frontera del producto LLM (chat, retry, fallback, providers, conversation sto
 |-----|--------|------|
 | `proyecto-m1` | M1 — Fundamentos | "Hola, soy el asistente": primera llamada con abstracción multi-provider |
 | `proyecto-m2` | M2 — Patrones LLM | Asistente conversacional con personalidad, intent, guardrails, contexto, memoria, prompts versionados, tests |
-| `proyecto-m3` | M3 — Embeddings (próximo) | Catálogo y FAQs indexados con embeddings + pgvector |
-| `proyecto-m4` | M4 — RAG | Asistente que responde sobre el catálogo con citas |
+| `proyecto-m3` | M3 — Embeddings | Catálogo indexado en pgvector con `gemini-embedding-001` |
+| `proyecto-m4` | M4 — RAG | Asistente que responde sobre el catálogo con retrieval + rerank + citas validadas + suite de evals |
 | `proyecto-m5` | M5 — Agentes | Function calling + supervisor multi-agente |
 | `proyecto-m6` | M6 — LLMOps | Asistente desplegado y monitoreado en producción |
 
