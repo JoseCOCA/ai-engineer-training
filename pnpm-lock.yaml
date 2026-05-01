@@ -654,6 +654,31 @@ importers:
         specifier: ^5.7.0
         version: 5.9.3
 
+  code/m06-llmops/sesion-15:
+    dependencies:
+      '@curso-ai/llm':
+        specifier: workspace:*
+        version: link:../../packages/llm
+      ai:
+        specifier: ^5.0.0
+        version: 5.0.180(zod@3.25.76)
+      langfuse:
+        specifier: ^3.36.0
+        version: 3.38.20
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.17
+      tsx:
+        specifier: ^4.20.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+
   code/packages/llm:
     dependencies:
       '@ai-sdk/anthropic':
@@ -1296,6 +1321,14 @@ packages:
 
   json-schema@0.4.0:
     resolution: {integrity: sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==}
+
+  langfuse-core@3.38.20:
+    resolution: {integrity: sha512-zBKVmQN/1oT5VWZUBYlWzvokIlkC/6mnpgr/2atMyTeAm+jR3ia7w2iJMjlrF5/oG8ukO1s8+LDRCzJpF1QeEA==}
+    engines: {node: '>=18'}
+
+  langfuse@3.38.20:
+    resolution: {integrity: sha512-MAmBAASSzJtmK1O9HQegA1mFsQhT8Yf+OJRGvE7FXkyv3g/eiBE0glLD0Ohg3pkxhoPdggM5SejK7ue9ctlaMA==}
+    engines: {node: '>=18'}
 
   langsmith@0.5.26:
     resolution: {integrity: sha512-HmmFgeQR2n9x1Kq8NiVaNL/j72ta71qN11hYjbyePJ/QuYEnOMhQjbNv9KeyKB3bOetpIzNalQbhHm+RyKoPRQ==}
@@ -2033,6 +2066,14 @@ snapshots:
   js-tokens@9.0.1: {}
 
   json-schema@0.4.0: {}
+
+  langfuse-core@3.38.20:
+    dependencies:
+      mustache: 4.2.0
+
+  langfuse@3.38.20:
+    dependencies:
+      langfuse-core: 3.38.20
 
   langsmith@0.5.26(@opentelemetry/api@1.9.0):
     dependencies:

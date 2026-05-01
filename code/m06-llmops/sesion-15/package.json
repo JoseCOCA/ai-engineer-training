@@ -1,0 +1,24 @@
+{
+  "name": "@curso-ai/m06-sesion-15",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos ejecutables de S15 — LLMOps: Langfuse, A/B testing, cost tracking, deployment.",
+  "scripts": {
+    "langfuse-demo": "tsx --env-file=../../../.env src/01-langfuse-demo.ts",
+    "ab-testing": "tsx --env-file=../../../.env src/02-ab-testing.ts",
+    "cost-tracking": "tsx --env-file=../../../.env src/03-cost-tracking.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@curso-ai/llm": "workspace:*",
+    "ai": "^5.0.0",
+    "langfuse": "^3.36.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,43 @@
+# Compose de producción para el integrador.
+#
+# Servicios:
+#   - postgres: pgvector con catálogo indexado.
+#   - agent: el integrador, depende de postgres healthy.
+#
+# Variables sensibles vienen de .env (NO committear).
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-curso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-curso}
+      POSTGRES_DB: ${POSTGRES_DB:-curso_ai}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-curso} -d ${POSTGRES_DB:-curso_ai}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  agent:
+    build:
+      context: ../../..
+      dockerfile: code/m06-llmops/sesion-15/Dockerfile
+    environment:
+      DEFAULT_LLM_PROVIDER: ${DEFAULT_LLM_PROVIDER:-google}
+      GOOGLE_GENERATIVE_AI_API_KEY: ${GOOGLE_GENERATIVE_AI_API_KEY}
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-curso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-curso}
+      POSTGRES_DB: ${POSTGRES_DB:-curso_ai}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_HOST: ${LANGFUSE_HOST:-https://cloud.langfuse.com}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pg-data:
