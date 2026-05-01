@@ -1,6 +1,6 @@
 {
   "name": "@curso-ai/proyecto-integrador",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "description": "TiendaPro — agente de soporte conversacional para e-commerce. Proyecto integrador del curso AI Engineer.",
@@ -23,6 +23,7 @@
     "@langchain/langgraph": "^1.2.0",
     "ai": "^5.0.0",
     "gpt-tokenizer": "^3.0.0",
+    "langfuse": "^3.36.0",
     "pg": "^8.13.0",
     "zod": "^3.23.0"
   },

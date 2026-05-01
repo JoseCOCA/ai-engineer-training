@@ -2,16 +2,17 @@
 
 Asistente conversacional para un e-commerce ficticio. Crece módulo a módulo a lo largo del curso.
 
-## Estado actual — Hito M5 (`proyecto-m5`)
+## Estado actual — Hito M6 (`proyecto-m6`) — CIERRE DEL CURSO
 
-**Asistente conversacional multi-agente con LangGraph: catálogo (RAG) + pedidos + escalación.** Capacidades acumuladas:
+**Asistente conversacional multi-agente con observabilidad y deployment listo para producción.** Capacidades finales del proyecto integrador:
 
 - **Chat service base** — `@curso-ai/llm` con retry + fallback + instrumentación.
 - **Guardrails** de input/output (`src/lib/guardrails.ts`).
-- **RAG pipeline (M4)**: retrieve pgvector → listwise rerank → structured output con citas validadas. Sigue corriendo con Vercel AI SDK pero ahora envuelto como **tool** del catalog worker.
-- **Supervisor multi-agente con LangGraph (M5)**: classifier puro que rutea a 3 workers especializados (`catalogWorker`, `ordersWorker`, `escalationWorker`). Cada worker tiene tools aisladas (principio de menor privilegio).
+- **RAG pipeline (M4)**: retrieve pgvector → listwise rerank → structured output con citas validadas. Envuelto como tool del catalog worker.
+- **Supervisor multi-agente con LangGraph (M5)**: classifier puro que rutea a 3 workers especializados (`catalogWorker`, `ordersWorker`, `escalationWorker`). Tools aisladas por worker.
 - **Sandboxing**: `recursionLimit=25` + output validation con zod en el grafo.
-- **Tools del agente** (M5): `searchCatalog` (envuelve RAG), `getOrderStatus` (BD mock de pedidos), `escalateToHuman` (tickets).
+- **Observabilidad con Langfuse (M6)**: cada `runAgent()` emite trace + span con userId/sessionId opcional. Si las env keys no están, las funciones son no-ops y el agente funciona idéntico.
+- **Deployment con Docker (M6)**: `Dockerfile` multi-stage + `docker-compose.production.yml` con postgres + healthcheck.
 - **Memoria conversacional** — `ConversationStore` por turnos del usuario.
 - **Tests Ring 1** — unit del validador de citas + del classifier (`test:rag`, `test:agent`).
 - **Suite de evals Ring 2** — `evals/eval-set.json` + runner con 5 asserts (`test:evals`).
@@ -145,7 +146,7 @@ La frontera del producto LLM (chat, retry, fallback, providers, conversation sto
 | `proyecto-m3` | M3 — Embeddings | Catálogo indexado en pgvector con `gemini-embedding-001` |
 | `proyecto-m4` | M4 — RAG | Asistente que responde sobre el catálogo con retrieval + rerank + citas validadas + suite de evals |
 | `proyecto-m5` | M5 — Agentes | Supervisor multi-agente con LangGraph: catalog (RAG) + orders + escalation. Tools aisladas, output validation, recursionLimit |
-| `proyecto-m6` | M6 — LLMOps | Asistente desplegado y monitoreado en producción |
+| `proyecto-m6` | M6 — LLMOps | Observabilidad con Langfuse + Dockerfile multi-stage + docker-compose.production con healthcheck |
 
 ## Documentación pedagógica
 
