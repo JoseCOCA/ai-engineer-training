@@ -76,16 +76,34 @@ Todo lo necesario corre **localmente** vía `docker-compose`.
 
 1. **Fundamentos de productos con IA** — qué es un AI Engineer, panorama LLM, primera llamada API. *(cerrado, tag `proyecto-m1`)*
 2. **Patrones de aplicaciones LLM** — wrappers, prompts estructurados, contexto, memoria conversacional, guardrails. *(cerrado, tag `proyecto-m2`)*
-3. **Embeddings y búsqueda vectorial** — chunking, embeddings, BBDD vectoriales, búsqueda semántica.
-4. **Arquitectura RAG** — retrieval, reranking, generación con citas, evaluación de calidad.
-5. **Orquestación de agentes** — function calling, LangGraph, multi-agente.
-6. **Despliegue y puesta en producción** — LLMOps, observabilidad, costes, Spec-Driven Development.
+3. **Embeddings y búsqueda vectorial** — chunking, embeddings, BBDD vectoriales, búsqueda semántica. *(cerrado, tag `proyecto-m3`)*
+4. **Arquitectura RAG** — retrieval, reranking, generación con citas, evaluación con RAGAS y Promptfoo. *(cerrado, tag `proyecto-m4`)*
+5. **Orquestación de agentes** — function calling, LangGraph.js, multi-agente con supervisor + workers, HITL, sandboxing. *(cerrado, tag `proyecto-m5`)*
+6. **Despliegue y puesta en producción** — LLMOps con Langfuse, A/B testing, cost tracking, deployment con Docker, Lab de productividad (SDD, MCPs, skills). *(cerrado, tag `proyecto-m6`)*
 
 Detalle completo en [`docs/00-curriculum.md`](docs/00-curriculum.md).
 
 ## Estado del curso
 
-🚧 **En desarrollo.** Las sesiones se publican en orden. Cada commit corresponde a una sesión completa o un hito del repo.
+✅ **Curso completo.** Las 6 módulos cerrados con sus respectivos tags `proyecto-m1` a `proyecto-m6`. ~22 sesiones publicadas, ~30 paquetes pnpm de demos ejecutables, integrador TiendaPro evolucionado de "hola mundo" a multi-agente con observabilidad listo para producción.
+
+### Resumen del integrador por módulo
+
+| Tag | Capacidades agregadas |
+|-----|----------------------|
+| `proyecto-m1` | Primera llamada con abstracción multi-provider |
+| `proyecto-m2` | Asistente conversacional con personalidad, intent, guardrails, memoria, prompts versionados |
+| `proyecto-m3` | Catálogo indexado en pgvector con `gemini-embedding-001` |
+| `proyecto-m4` | Pipeline RAG real con citas validadas + suite de evals (Promptfoo-like) |
+| `proyecto-m5` | Supervisor multi-agente con LangGraph (catalog/orders/escalation) |
+| `proyecto-m6` | Observabilidad con Langfuse + Dockerfile + docker-compose.production |
+
+### Cómo recorrer el curso completo
+
+- **Lectura secuencial:** módulo 1 → 6. Cada sesión depende de las anteriores.
+- **Por interés específico:** ir directo al módulo del tema (ej: solo RAG → M4).
+- **Como referencia:** consultar la sesión específica cuando enfrentes el problema en producción.
+- **Como base para tu proyecto:** clonar el integrador a tu propio repo y reemplazar el dominio (TiendaPro → tu dominio).
 
 ## Setup rápido
 
