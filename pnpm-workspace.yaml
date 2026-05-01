@@ -8,6 +8,7 @@ packages:
   # Sandboxes de sesiones — autocontenidos pero participan del workspace
   # para que un solo `pnpm install` desde la raíz instale todo.
   - "code/m0[1-6]-*/sesion-*"
+  - "code/m0[1-6]-*/lab-*"
 
   # Proyecto integrador
   - "code/proyecto-integrador"
